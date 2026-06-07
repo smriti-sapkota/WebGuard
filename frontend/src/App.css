@@ -2,18 +2,18 @@
 
 /* ── Design tokens ─────────────────────────────────────────────────── */
 :root {
-  --bg: #0b0f1a;
-  --bg-1: #111827;
-  --bg-2: #161e2e;
-  --panel: #161b22;
+  --bg: #b1e5dc;
+  --bg-1: #e8ecf4;
+  --bg-2: #e1e8f7;
+  --panel: white;
   --panel-2: #1c2230;
   --line: #1f2d45;
   --line-2: #253450;
-  --text: #c8d8e8;
-  --text-2: #8b96a5;
+  --text: #4d4e50;
+  --text-2: #4d4e50;
   --text-3: #4f5b6b;
-  --brand: #38bdf8;
-  --brand-dim: #00a89a;
+  --brand: #3a9c94;
+  --brand-dim: #1885b4;
   --brand-glow: rgba(0, 199, 180, 0.12);
   --accent: #f47067; /* coral-red: danger / high severity  */
   --accent-dim: #d45f57;
@@ -159,7 +159,7 @@ body {
 .hero h1 {
   font-size: clamp(2rem, 4vw, 3.2rem);
   font-weight: 600;
-  color: #e6edf3;
+  color: #abb5bd;
   letter-spacing: -0.02em;
   line-height: 1.1;
 }

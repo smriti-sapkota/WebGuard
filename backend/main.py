@@ -18,6 +18,7 @@ app.add_middleware(
 
 app.include_router(scan.router, prefix="/api")
 
+
 @app.get("/")
 def root():
     return {"message": "WebGuard API is running!"}

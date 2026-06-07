@@ -1,17 +1,20 @@
-import "./App.css";
+import { useState } from "react";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import HomePage from "./pages/HomePage";
+import ScannerPage from "./pages/ScannerPage";
+import ResultsPage from "./pages/ResultsPage";
 import useScan from "./hooks/useScan";
-import HeroSection from "./components/HeroSection";
-import ScanForm from "./components/ScanForm";
-import StatusPanel from "./components/StatusPanel";
-import FindingsPanel from "./components/FindingsPanel";
 
 export default function App() {
+  const [page, setPage] = useState("home");
+
   const {
     form,
     setField,
     scanId,
-    scanStatus,
-    scanTarget,
+    status,
+    target,
     updatedAt,
     vulns,
     message,
@@ -21,24 +24,28 @@ export default function App() {
   } = useScan();
 
   return (
-    <div className="app">
-      <main className="layout">
-        <HeroSection />
-        <ScanForm
+    <>
+      <Header page={page} setPage={setPage} />
+
+      {page === "home" && <HomePage setPage={setPage} />}
+
+      {page === "scanner" && (
+        <ScannerPage
           form={form}
           setField={setField}
           scanning={scanning}
-          onSubmit={startScan}
-          onStopPolling={stopPolling}
-        />
-        <StatusPanel
+          startScan={startScan}
+          stopPolling={stopPolling}
           scanId={scanId}
-          scanStatus={scanStatus}
-          scanTarget={scanTarget}
+          status={status}
+          target={target}
           updatedAt={updatedAt}
         />
-        <FindingsPanel vulns={vulns} message={message} />
-      </main>
-    </div>
+      )}
+
+      {page === "results" && <ResultsPage vulns={vulns} message={message} />}
+
+      <Footer />
+    </>
   );
 }
