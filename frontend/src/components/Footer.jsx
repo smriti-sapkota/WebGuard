@@ -3,13 +3,13 @@ const ShieldIcon = () => (
     <path
       d="M12 2L3 6v6c0 5.25 3.9 10.15 9 11.35C17.1 17.15 21 12.25 21 12V6L12 2Z"
       fill="var(--green-light)"
-      stroke="var(--green)"
+      stroke="var(--highlight)"
       strokeWidth="1.8"
       strokeLinejoin="round"
     />
     <path
       d="M9 12l2.5 2.5L15 9"
-      stroke="var(--green)"
+      stroke="var(--highlight)"
       strokeWidth="1.8"
       strokeLinecap="round"
       strokeLinejoin="round"
