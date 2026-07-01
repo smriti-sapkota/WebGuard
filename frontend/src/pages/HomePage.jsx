@@ -89,7 +89,7 @@ export default function HomePage({ setPage }) {
 
       {/* Vuln types */}
       <div className="vuln-section">
-        <div className="section-label">Coverage</div>
+        {/* <div className="section-label">Coverage</div> */}
         <div className="section-title">What WebGuard detects</div>
         <div className="vuln-grid">
           {VULNS.map((v) => (

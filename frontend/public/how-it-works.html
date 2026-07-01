@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WebGuard | How It Works</title>
+    <style>
+      :root {
+        --bg: #f4f8f7;
+        --card: #ffffff;
+        --text: #1f2a37;
+        --muted: #526173;
+        --line: #d6e2df;
+        --brand: #2f8f87;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(180deg, #e9f4f2 0%, var(--bg) 100%);
+        color: var(--text);
+      }
+      .wrap {
+        max-width: 860px;
+        margin: 0 auto;
+        padding: 36px 20px;
+      }
+      h1 {
+        margin: 0 0 8px;
+        font-size: 30px;
+      }
+      p.lead {
+        margin: 0 0 24px;
+        color: var(--muted);
+      }
+      .item {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 16px;
+        margin-bottom: 12px;
+      }
+      h3 {
+        margin: 0 0 8px;
+        color: var(--brand);
+        font-size: 16px;
+      }
+      p {
+        margin: 0;
+        line-height: 1.6;
+        color: var(--muted);
+      }
+      a.back {
+        display: inline-block;
+        margin-top: 14px;
+        color: var(--brand);
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <h1>How WebGuard Works</h1>
+      <p class="lead">
+        A quick look at the scanning flow from start to finish.
+      </p>
+
+      <section class="item">
+        <h3>Step 1 - Configure</h3>
+        <p>Enter the target URL and optional login credentials.</p>
+      </section>
+      <section class="item">
+        <h3>Step 2 - Authenticate</h3>
+        <p>WebGuard logs in so protected routes can be reached and tested.</p>
+      </section>
+      <section class="item">
+        <h3>Step 3 - Crawl</h3>
+        <p>
+          The crawler discovers pages, forms, and parameters available on the
+          target.
+        </p>
+      </section>
+      <section class="item">
+        <h3>Step 4 - Test</h3>
+        <p>
+          Each input point is tested for SQL Injection, XSS, and CSRF
+          weaknesses.
+        </p>
+      </section>
+      <section class="item">
+        <h3>Step 5 - Report</h3>
+        <p>
+          Findings are saved and shown in the results view with severity and
+          evidence.
+        </p>
+      </section>
+
+      <a class="back" href="/">Return to WebGuard</a>
+    </main>
+  </body>
+</html>

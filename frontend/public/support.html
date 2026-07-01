@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WebGuard | Support</title>
+    <style>
+      :root {
+        --bg: #f4f8f7;
+        --card: #ffffff;
+        --text: #1f2a37;
+        --muted: #526173;
+        --line: #d6e2df;
+        --brand: #2f8f87;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(180deg, #e9f4f2 0%, var(--bg) 100%);
+        color: var(--text);
+      }
+      .wrap {
+        max-width: 860px;
+        margin: 0 auto;
+        padding: 36px 20px;
+      }
+      h1 {
+        margin: 0 0 8px;
+        font-size: 30px;
+      }
+      p.lead {
+        margin: 0 0 24px;
+        color: var(--muted);
+      }
+      .item {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 16px;
+        margin-bottom: 12px;
+      }
+      h3 {
+        margin: 0 0 8px;
+        color: var(--brand);
+        font-size: 16px;
+      }
+      p {
+        margin: 0;
+        line-height: 1.6;
+        color: var(--muted);
+      }
+      a.back {
+        display: inline-block;
+        margin-top: 14px;
+        color: var(--brand);
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <h1>Support</h1>
+      <p class="lead">Troubleshooting help for common issues.</p>
+
+      <section class="item">
+        <h3>Backend does not start</h3>
+        <p>
+          Activate your virtual environment and install backend dependencies
+          from requirements.txt.
+        </p>
+      </section>
+      <section class="item">
+        <h3>Scan fails</h3>
+        <p>
+          Use browser DevTools network tab to inspect the failed API request and
+          error response.
+        </p>
+      </section>
+      <section class="item">
+        <h3>CORS error</h3>
+        <p>
+          Confirm your FastAPI app has CORSMiddleware configured for your
+          frontend origin.
+        </p>
+      </section>
+      <section class="item">
+        <h3>Empty results</h3>
+        <p>
+          Run a scan first and wait until status is complete before opening
+          results.
+        </p>
+      </section>
+
+      <a class="back" href="/">Return to WebGuard</a>
+    </main>
+  </body>
+</html>

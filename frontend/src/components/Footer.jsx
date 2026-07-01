@@ -17,8 +17,19 @@ const ShieldIcon = () => (
   </svg>
 );
 
-const QUESTIONS = ["FAQ", "How it works", "Documentation", "Support"];
-const LEGAL = ["Privacy Policy", "Terms of Service", "Contact", "Security"];
+const QUESTIONS = [
+  { label: "FAQ", href: "/faq.html" },
+  { label: "How it works", href: "/how-it-works.html" },
+  { label: "Documentation", href: "/documentation.html" },
+  { label: "Support", href: "/support.html" },
+];
+
+const LEGAL = [
+  { label: "Privacy Policy", href: "/privacy-policy.html" },
+  { label: "Terms of Service", href: "/terms-of-service.html" },
+  { label: "Contact", href: "/contact.html" },
+  { label: "Security", href: "/security.html" },
+];
 
 export default function Footer() {
   return (
@@ -45,9 +56,15 @@ export default function Footer() {
           <div className="footer-col-title">Questions</div>
           <div className="footer-links">
             {QUESTIONS.map((link) => (
-              <button key={link} className="footer-link">
-                {link}
-              </button>
+              <a
+                key={link.label}
+                className="footer-link"
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {link.label}
+              </a>
             ))}
           </div>
         </div>
@@ -57,9 +74,15 @@ export default function Footer() {
           <div className="footer-col-title">Legal</div>
           <div className="footer-links">
             {LEGAL.map((link) => (
-              <button key={link} className="footer-link">
-                {link}
-              </button>
+              <a
+                key={link.label}
+                className="footer-link"
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {link.label}
+              </a>
             ))}
           </div>
         </div>

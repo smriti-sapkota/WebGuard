@@ -282,14 +282,14 @@ body {
   margin: 0 auto;
   padding: 56px 28px;
 }
-.section-label {
+/* .section-label {
   font-family: "DM Mono", monospace;
   font-size: 10.5px;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--text3);
   margin-bottom: 8px;
-}
+} */
 .section-title {
   font-size: 22px;
   font-weight: 600;
