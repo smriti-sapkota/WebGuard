@@ -2,15 +2,15 @@
 :root {
   --bg: /*#f6f8f6; #fed3dd; #d5f3d8;#9adfa2;*/ #f8fafc;
   --surface: #ffffff;
-  --surface2: #f0f3f0;
+  --surface2: #edf3e9;
   --border: #dde4dd;
-  --border2: #c8d4c8;
+  --border2: #ffffff;
   --text: #1c231c;
   --text2: #5a6e5a;
-  --text3: #9db09d;
-  --highlight:/* #1e6b35; #34d8c2; #f9adbd;*/ #9adfa2;
-  --green-light: #e6f2ea;
-  --green-mid: /*#2d8a48;*/ #6cda82;
+  --text3: #505b50;
+  --highlight:/* #1e6b35; #34d8c2; #f9adbd; #9adfa2;*/ #34a853;
+  --green-light:/* #e6f2ea;*/ #daefcd;
+  --green-mid: /* #1d4625;*/ #203826;
   --green-border: #a8d4b4;
   --red: #b83232;
   --orange: #ebb433cf;
@@ -139,7 +139,8 @@ body {
   align-items: center;
   gap: 6px;
   font-family: "DM Mono", monospace;
-  font-size: 11px;
+  font-size: 12px;
+  font-weight: 500;
   color: var(--highlight);
   background: var(--green-light);
   border: 1px solid var(--green-border);
@@ -204,8 +205,8 @@ body {
   font-weight: 500;
   padding: 10px 22px;
   background: transparent;
-  color: var(--text2);
-  border: 1px solid var(--border2);
+  color: var(--text);
+  border: 1px solid rgb(171, 177, 171);
   border-radius: 8px;
   cursor: pointer;
   transition:
@@ -214,7 +215,7 @@ body {
 }
 .btn-outline:hover {
   background: var(--surface2);
-  color: var(--text);
+  color: var(--text2);
 }
 
 .home-img-wrap {
@@ -372,14 +373,14 @@ body {
   align-items: start;
 }
 .card {
-  background: var(--surface);
+  background:/* var(--surface);*/ rgba(0, 0, 0, 0.06);
   border: 1px solid var(--border);
   border-radius: 12px;
   padding: 20px;
 }
 .card-title {
   font-family: "DM Mono", monospace;
-  font-size: 10px;
+  font-size: 13px;
   text-transform: uppercase;
   letter-spacing: 0.09em;
   color: var(--text3);
@@ -387,6 +388,7 @@ body {
   display: flex;
   align-items: center;
   gap: 7px;
+  font-weight: 600;
 }
 .card-title::before {
   content: "";
@@ -412,7 +414,8 @@ body {
 }
 .flabel {
   font-family: "DM Mono", monospace;
-  font-size: 10px;
+  font-size: 12px;
+  font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--text3);
@@ -424,7 +427,7 @@ body {
   font-family: "DM Mono", monospace;
   font-size: 12px;
   padding: 8px 10px;
-  background: var(--surface2);
+  background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 7px;
   color: var(--text);
@@ -464,7 +467,7 @@ body {
   accent-color: var(--highlight);
 }
 .auth-box {
-  background: var(--surface2);
+  background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 14px;
@@ -521,14 +524,15 @@ body {
   gap: 8px;
 }
 .scell {
-  background: var(--surface2);
+  background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 12px;
 }
 .slabel {
   font-family: "DM Mono", monospace;
-  font-size: 9.5px;
+  font-size: 12px;
+  font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.09em;
   color: var(--text3);
@@ -863,7 +867,7 @@ body {
   padding: 0;
 }
 .footer-link:hover {
-  color: var(--highlight);
+  color: #4f7cac;
 }
 .footer-bottom {
   max-width: 1080px;

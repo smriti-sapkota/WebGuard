@@ -90,7 +90,7 @@ export default function Footer() {
 
       <div className="footer-bottom">
         <span className="footer-copy">
-          © 2025 WebGuard. All rights reserved.
+          © 2026 WebGuard. All rights reserved.
         </span>
         <div className="footer-badges">
           {["SQLi", "XSS", "CSRF"].map((t) => (
