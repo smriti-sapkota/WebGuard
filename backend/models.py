@@ -12,6 +12,7 @@ class Scan(SQLModel, table=True):
     status: str = Field(default="pending")   # pending → running → completed / failed
     created_at: datetime = Field(default_factory=datetime.utcnow)
     completed_at: Optional[datetime] = None
+    error_message: Optional[str] = None
 
     vulnerabilities: List["Vulnerability"] = Relationship(back_populates="scan")
 

@@ -122,6 +122,23 @@ def extract_forms(soup: BeautifulSoup, current_url: str) -> list:
 def crawl(target_url: str, cookies=None) -> list:
     base_domain = urlparse(target_url).netloc
 
+    try:
+        print(f"[Crawler] Fetching seed URL: {target_url}")
+        seed_response = requests.get(
+            target_url,
+            timeout=REQUEST_TIMEOUT,
+            headers={"User-Agent": "Mozilla/5.0 (WebGuard Security Scanner)"},
+            cookies=cookies,
+            allow_redirects=True,
+        )
+    except requests.RequestException as e:
+        print(f"[Crawler] Failed to fetch seed URL {target_url}: {e}")
+        raise
+
+    if "text/html" not in seed_response.headers.get("Content-Type", ""):
+        print(f"[Crawler] Seed URL is not HTML: {target_url}")
+        return []
+
     url_queue = Queue()
     url_queue.put(target_url)
 

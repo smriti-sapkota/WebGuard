@@ -48,6 +48,7 @@ class ScanResultOut(BaseModel):
     status: str
     created_at: datetime
     completed_at: Optional[datetime]
+    error_message: Optional[str] = None
     vulnerabilities: List[VulnerabilityOut] = []
 
     class Config:

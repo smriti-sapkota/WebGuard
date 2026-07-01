@@ -18,6 +18,42 @@ router = APIRouter()
 SCAN_TIME_LIMIT_SECONDS = 180
 
 
+def classify_fetch_error(error: Exception, target_url: str) -> str:
+    """Turn low-level network failures into user-facing messages."""
+    error_text = str(error).lower()
+
+    slow_or_offline_markers = (
+        "network is unreachable",
+        "no route to host",
+        "connection timed out",
+        "timed out",
+        "failed to establish a new connection",
+        "connection refused",
+        "unable to connect",
+    )
+    domain_failure_markers = (
+        "name or service not known",
+        "temporary failure in name resolution",
+        "nameresolutionerror",
+        "getaddrinfo failed",
+        "nodename nor servname provided",
+    )
+
+    if isinstance(error, requests.exceptions.Timeout):
+        return "Your internet connection is slow or unavailable, so the target did not respond in time."
+
+    if isinstance(error, requests.exceptions.ConnectionError):
+        if any(marker in error_text for marker in slow_or_offline_markers):
+            return "Your internet connection is slow or unavailable, so the target could not be reached."
+
+        if any(marker in error_text for marker in domain_failure_markers):
+            return f"The domain in {target_url} does not exist or could not be resolved."
+
+        return "Your internet connection is slow or unavailable, so the target could not be reached."
+
+    return f"Could not reach the target URL: {error}"
+
+
 def authenticate_scan_session(auth_request) -> RequestsCookieJar:
     """Log in once and return the authenticated cookies for downstream requests."""
     login_client = requests.Session()
@@ -122,13 +158,32 @@ def run_scan(scan_id: int, target_url: str, auth_request=None):
         session.commit()
 
         try:
+            scan.error_message = None
             cookies = None
             if auth_request is not None:
-                print(f"[WebGuard] Authenticating scan session for {target_url}")
-                cookies = authenticate_scan_session(auth_request)
+                try:
+                    print(f"[WebGuard] Authenticating scan session for {target_url}")
+                    cookies = authenticate_scan_session(auth_request)
+                except requests.exceptions.RequestException as e:
+                    print(f"[WebGuard] Authentication failed: {e}")
+                    scan.status = "failed"
+                    scan.error_message = classify_fetch_error(e, str(auth_request.login_url))
+                    scan.completed_at = datetime.utcnow()
+                    session.add(scan)
+                    session.commit()
+                    return
 
-            print(f"[WebGuard] Starting crawl for {target_url}")
-            crawl_results = crawl(target_url, cookies=cookies)
+            try:
+                print(f"[WebGuard] Starting crawl for {target_url}")
+                crawl_results = crawl(target_url, cookies=cookies)
+            except requests.exceptions.RequestException as e:
+                print(f"[WebGuard] Crawl failed: {e}")
+                scan.status = "failed"
+                scan.error_message = classify_fetch_error(e, target_url)
+                scan.completed_at = datetime.utcnow()
+                session.add(scan)
+                session.commit()
+                return
 
             all_vulnerabilities = []
             scan_started_at = datetime.utcnow()
@@ -187,10 +242,17 @@ def run_scan(scan_id: int, target_url: str, auth_request=None):
             scan.status = "completed"
             scan.completed_at = datetime.utcnow()
 
+        except requests.exceptions.RequestException as e:
+            print(f"[WebGuard] Scan failed: {e}")
+            scan.status = "failed"
+            scan.error_message = classify_fetch_error(e, target_url)
+            scan.completed_at = datetime.utcnow()
+
         except Exception as e:
             # If anything goes wrong, mark it as failed
             print(f"[WebGuard] Scan failed: {e}")
             scan.status = "failed"
+            scan.error_message = f"Scan failed unexpectedly: {e}"
             scan.completed_at = datetime.utcnow()
 
         session.add(scan)
@@ -240,5 +302,6 @@ def get_scan_result(scan_id: int, session: SESSION_LOCAL):
         status=scan.status,
         created_at=scan.created_at,
         completed_at=scan.completed_at,
+        error_message=scan.error_message,
         vulnerabilities=scan.vulnerabilities, 
     )
