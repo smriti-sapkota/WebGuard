@@ -5,6 +5,16 @@ from .database import SQLModel
 
 
 
+class User(SQLModel, table=True):
+
+    id: Optional[int] = Field(default=None, primary_key=True)
+    email: str = Field(unique=True, index=True)
+    name: Optional[str] = None
+    password_hash: Optional[str] = None      # None for Google-only accounts
+    google_sub: Optional[str] = Field(default=None, unique=True, index=True)
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+
+
 class Scan(SQLModel, table=True):
 
     id: Optional[int] = Field(default=None, primary_key=True)
@@ -13,6 +23,7 @@ class Scan(SQLModel, table=True):
     created_at: datetime = Field(default_factory=datetime.utcnow)
     completed_at: Optional[datetime] = None
     error_message: Optional[str] = None
+    user_id: Optional[int] = Field(default=None, foreign_key="user.id", index=True)
 
     vulnerabilities: List["Vulnerability"] = Relationship(back_populates="scan")
 

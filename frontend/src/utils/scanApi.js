@@ -1,3 +1,5 @@
+import { authHeaders } from './api'
+
 export function normalizeBase(base) {
   return base.trim().replace(/\/+$/, '')
 }
@@ -18,7 +20,7 @@ export function parseExtraFields(raw) {
 export async function startScanRequest(apiBase, payload) {
   const res = await fetch(`${apiBase}/scan`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: authHeaders({ 'Content-Type': 'application/json' }),
     body: JSON.stringify(payload),
   })
 
@@ -43,7 +45,7 @@ export async function startScanRequest(apiBase, payload) {
 }
 
 export async function fetchScanStatus(apiBase, scanId) {
-  const res = await fetch(`${apiBase}/scan/${scanId}`)
+  const res = await fetch(`${apiBase}/scan/${scanId}`, { headers: authHeaders() })
   if (!res.ok) {
     let detail = `HTTP ${res.status}`
     try {

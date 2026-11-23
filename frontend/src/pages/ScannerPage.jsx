@@ -43,16 +43,6 @@ export default function ScannerPage({
           <form onSubmit={startScan}>
             <div className="frow">
               <div className="fgroup">
-                <label className="flabel">API Base</label>
-                <input
-                  type="url"
-                  className="finput"
-                  value={form.apiBase}
-                  onChange={(e) => setField("apiBase", e.target.value)}
-                  required
-                />
-              </div>
-              <div className="fgroup">
                 <label className="flabel">Target URL</label>
                 <input
                   type="url"

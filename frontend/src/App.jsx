@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
+import { useAuth } from "./context/AuthContext";
+import LoginPage from "./pages/LoginPage";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import HomePage from "./pages/HomePage";
@@ -8,6 +10,14 @@ import useScan from "./hooks/useScan";
 
 export default function App() {
   const [page, setPage] = useState("home");
+  const { user, loading } = useAuth();
+  const goScanner = useCallback(() => setPage("scanner"), []);
+
+  // Scanner/results need a login
+  const shown =
+    !loading && !user && (page === "scanner" || page === "results")
+      ? "login"
+      : page;
 
   const {
     form,
@@ -25,11 +35,13 @@ export default function App() {
 
   return (
     <>
-      <Header page={page} setPage={setPage} />
+      <Header page={shown} setPage={setPage} />
 
-      {page === "home" && <HomePage setPage={setPage} />}
+      {shown === "home" && <HomePage setPage={setPage} />}
 
-      {page === "scanner" && (
+      {shown === "login" && <LoginPage onDone={goScanner} />}
+
+      {shown === "scanner" && (
         <ScannerPage
           form={form}
           setField={setField}
@@ -43,7 +55,7 @@ export default function App() {
         />
       )}
 
-      {page === "results" && <ResultsPage vulns={vulns} message={message} />}
+      {shown === "results" && <ResultsPage vulns={vulns} message={message} />}
 
       <Footer />
     </>

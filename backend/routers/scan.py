@@ -4,10 +4,13 @@ from fastapi import APIRouter, Depends, HTTPException, status
 import requests
 from bs4 import BeautifulSoup
 from requests.cookies import RequestsCookieJar
-from sqlmodel import Session
+from datetime import timedelta
+from sqlmodel import Session, select, func
 
+from ..config import settings
 from ..database import SESSION_LOCAL, engine
-from ..models import Scan, Vulnerability
+from ..security import assert_public_url, get_current_user
+from ..models import Scan, User, Vulnerability
 from ..schemas import ScanRequest, ScanResponse, ScanResultOut
 from ..scanner.crawler import crawl
 from ..scanner.sql_scanner import scan_sql_injection
@@ -261,15 +264,39 @@ def run_scan(scan_id: int, target_url: str, auth_request=None):
 
 
 @router.post("/scan", response_model=ScanResponse)
-def start_scan(request: ScanRequest, session: SESSION_LOCAL):
-    
-    scan = Scan(target_url=str(request.url))
+def start_scan(
+    request: ScanRequest,
+    session: SESSION_LOCAL,
+    user: User = Depends(get_current_user),
+):
+    # Block private/internal targets (SSRF protection)
+    urls_to_check = [str(request.url)]
+    if request.auth is not None:
+        urls_to_check.append(str(request.auth.login_url))
+        if request.auth.security_url:
+            urls_to_check.append(str(request.auth.security_url))
+    try:
+        for u in urls_to_check:
+            assert_public_url(u)
+    except ValueError as e:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
+
+    # Rate limit: N scans per user per hour
+    since = datetime.utcnow() - timedelta(hours=1)
+    recent = session.exec(
+        select(func.count()).select_from(Scan).where(Scan.user_id == user.id, Scan.created_at >= since)
+    ).one()
+    if recent >= settings.MAX_SCANS_PER_HOUR:
+        raise HTTPException(
+            status_code=status.HTTP_429_TOO_MANY_REQUESTS,
+            detail=f"Scan limit reached ({settings.MAX_SCANS_PER_HOUR} per hour). Please try again later.",
+        )
+
+    scan = Scan(target_url=str(request.url), user_id=user.id)
     session.add(scan)
     session.commit()
     session.refresh(scan)
 
-    # Launch the scan in a background thread
-    # daemon=True means the thread won't prevent the server from shutting down
     thread = threading.Thread(
         target=run_scan,
         args=(scan.id, str(request.url), request.auth),
@@ -285,23 +312,23 @@ def start_scan(request: ScanRequest, session: SESSION_LOCAL):
 
 
 @router.get("/scan/{scan_id}", response_model=ScanResultOut)
-def get_scan_result(scan_id: int, session: SESSION_LOCAL):
-    """
-    Endpoint 2: Get scan results by ID.
-    
-    The frontend polls this every 3 seconds until status = "completed".
-    """
+def get_scan_result(
+    scan_id: int,
+    session: SESSION_LOCAL,
+    user: User = Depends(get_current_user),
+):
+    """Get scan results by ID (only the owner can see them)."""
     scan = session.get(Scan, scan_id)
 
-    if not scan:
+    if not scan or scan.user_id != user.id:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Scan {scan_id} not found")
 
     return ScanResultOut(
-        scan_id=scan.id, 
+        scan_id=scan.id,
         target_url=scan.target_url,
         status=scan.status,
         created_at=scan.created_at,
         completed_at=scan.completed_at,
         error_message=scan.error_message,
-        vulnerabilities=scan.vulnerabilities, 
+        vulnerabilities=scan.vulnerabilities,
     )

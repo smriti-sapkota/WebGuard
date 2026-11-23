@@ -36,7 +36,6 @@ pydantic_core==2.41.5
 Pygments==2.19.2
 pyreadline3==3.5.4
 python-multipart==0.0.21
-pywin32==311
 PyYAML==6.0.3
 rich==14.2.0
 rich-toolkit==0.17.1
@@ -56,4 +55,5 @@ urllib3==2.6.2
 uvicorn==0.40.0
 watchfiles==1.1.1
 websockets==15.0.1
-WMI==1.5.1
+
+PyJWT==2.10.1

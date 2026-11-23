@@ -1,4 +1,6 @@
-const ShieldIcon = ({ size = 16 }) => (
+import { useAuth } from "../context/AuthContext";
+
+const ShieldIcon =({ size = 16 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
     <path
       d="M12 2L3 6v6c0 5.25 3.9 10.15 9 11.35C17.1 17.15 21 12.25 21 12V6L12 2Z"
@@ -18,6 +20,7 @@ const ShieldIcon = ({ size = 16 }) => (
 );
 
 export default function Header({ page, setPage }) {
+  const { user, logout } = useAuth();
   return (
     <header className="header">
       <div className="header-inner">
@@ -47,6 +50,25 @@ export default function Header({ page, setPage }) {
               {label}
             </button>
           ))}
+          {user ? (
+            <button
+              className="nav-btn"
+              title={user.email}
+              onClick={() => {
+                logout();
+                setPage("home");
+              }}
+            >
+              Log out
+            </button>
+          ) : (
+            <button
+              className={`nav-btn ${page === "login" ? "active" : ""}`}
+              onClick={() => setPage("login")}
+            >
+              Log in
+            </button>
+          )}
         </nav>
       </div>
     </header>

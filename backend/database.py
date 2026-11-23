@@ -1,14 +1,18 @@
-from fastapi import Depends
-from sqlmodel import SQLModel, create_engine, Session
-from .config import settings
 from typing import Annotated
 
-DATABASE_URL = f"postgresql://{settings.DATABASE_USERNAME}:{settings.DATABASE_PASSWORD}@{settings.DATABASE_HOST}:{settings.DATABASE_PORT}/{settings.DATABASE_NAME}"
+from fastapi import Depends
+from sqlmodel import SQLModel, create_engine, Session
 
-engine = create_engine(DATABASE_URL, echo=True)
- 
+from .config import settings
+
+DATABASE_URL = settings.sqlalchemy_url
+
+engine = create_engine(DATABASE_URL, echo=False, pool_pre_ping=True, pool_recycle=300)
+
+
 def get_session():
     with Session(engine) as session:
         yield session
+
 
 SESSION_LOCAL = Annotated[Session, Depends(get_session)]

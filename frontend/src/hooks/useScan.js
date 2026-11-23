@@ -163,18 +163,19 @@
 // }
 import { useState, useRef, useCallback, useEffect } from 'react'
 import { normalizeBase, parseExtraFields, startScanRequest, fetchScanStatus } from '../utils/scanApi'
+import { API_BASE } from '../utils/api'
 
 const DEFAULTS = {
-  apiBase:        'http://127.0.0.1:8000/api',
-  targetUrl:      'http://127.0.0.1:4280/',
-  useAuth:        true,
-  loginUrl:       'http://127.0.0.1:4280/login.php',
+  apiBase:        API_BASE,
+  targetUrl:      import.meta.env.DEV ? 'http://127.0.0.1:4280/' : 'https://',
+  useAuth:        !!import.meta.env.DEV,
+  loginUrl:       import.meta.env.DEV ? 'http://127.0.0.1:4280/login.php' : '',
   loginMethod:    'post',
-  username:       'admin',
-  password:       'password',
+  username:       import.meta.env.DEV ? 'admin' : '',
+  password:       import.meta.env.DEV ? 'password' : '',
   usernameField:  'username',
   passwordField:  'password',
-  securityUrl:    'http://127.0.0.1:4280/security.php',
+  securityUrl:    import.meta.env.DEV ? 'http://127.0.0.1:4280/security.php' : '',
   securityLevel:  'low',
   securityField:  'security',
   extraFields:    '{"Login":"Login"}',
