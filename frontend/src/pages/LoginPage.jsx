@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { useAuth } from '../context/AuthContext'
-
-const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID
+import { fetchGoogleClientId } from '../utils/api'
 
 export default function LoginPage({ onDone }) {
   const { login, register, loginWithGoogle } = useAuth()
@@ -11,13 +10,20 @@ export default function LoginPage({ onDone }) {
   const [password, setPassword] = useState('')
   const [error, setError] = useState(null)
   const [busy, setBusy] = useState(false)
+  const [clientId, setClientId] = useState(null)
   const googleBtn = useRef(null)
 
   useEffect(() => {
-    if (!GOOGLE_CLIENT_ID) return
+    let alive = true
+    fetchGoogleClientId().then((id) => alive && setClientId(id))
+    return () => { alive = false }
+  }, [])
+
+  useEffect(() => {
+    if (!clientId) return
     function init() {
       window.google?.accounts.id.initialize({
-        client_id: GOOGLE_CLIENT_ID,
+        client_id: clientId,
         callback: async ({ credential }) => {
           try {
             await loginWithGoogle(credential)
@@ -29,7 +35,7 @@ export default function LoginPage({ onDone }) {
       })
       if (googleBtn.current) {
         window.google?.accounts.id.renderButton(googleBtn.current, {
-          theme: 'outline', size: 'large', width: 320, text: 'continue_with',
+          theme: 'outline', size: 'large', width: 340, text: 'continue_with', shape: 'rectangular',
         })
       }
     }
@@ -39,7 +45,7 @@ export default function LoginPage({ onDone }) {
     s.async = true
     s.onload = init
     document.head.appendChild(s)
-  }, [loginWithGoogle, onDone])
+  }, [clientId, loginWithGoogle, onDone])
 
   async function submit(e) {
     e.preventDefault()
@@ -56,52 +62,79 @@ export default function LoginPage({ onDone }) {
     }
   }
 
+  const isLogin = mode === 'login'
+
   return (
-    <div className="scanner-wrap" style={{ maxWidth: 420 }}>
-      <div className="page-head">
-        <h2>{mode === 'login' ? 'Log in' : 'Create account'}</h2>
-        <p>You need an account to run scans.</p>
-      </div>
-      <div className="hr" />
-      <div className="card">
-        {GOOGLE_CLIENT_ID && (
-          <>
-            <div ref={googleBtn} style={{ display: 'flex', justifyContent: 'center' }} />
-            <div style={{ textAlign: 'center', margin: '14px 0', opacity: 0.6 }}>or</div>
-          </>
-        )}
-        <form onSubmit={submit}>
-          {mode === 'register' && (
-            <div className="fgroup">
-              <label className="flabel">Name</label>
-              <input className="finput" value={name} onChange={(e) => setName(e.target.value)} />
-            </div>
+    <div className="login-page">
+      <aside className="login-side">
+        <div className="login-side-inner">
+          <div className="login-brand">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+              <path d="M12 2L3 6v6c0 5.25 3.9 10.15 9 11.35C17.1 17.15 21 12.25 21 12V6L12 2Z"
+                fill="rgba(255,255,255,0.15)" stroke="#fff" strokeWidth="1.8" strokeLinejoin="round" />
+              <path d="M9 12l2.5 2.5L15 9" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            WebGuard
+          </div>
+          <h2>Find the holes before someone else does.</h2>
+          <ul className="login-points">
+            <li>Automated SQL injection, XSS and CSRF checks</li>
+            <li>Authenticated scans behind your login page</li>
+            <li>Clear findings with fixes, ranked by severity</li>
+          </ul>
+          <p className="login-note">Only scan sites you own or have permission to test.</p>
+        </div>
+      </aside>
+
+      <section className="login-main">
+        <div className="login-card">
+          <h1>{isLogin ? 'Welcome back' : 'Create your account'}</h1>
+          <p className="login-sub">
+            {isLogin ? 'Log in to run and review your scans.' : 'Sign up to start scanning in under a minute.'}
+          </p>
+
+          {clientId && (
+            <>
+              <div ref={googleBtn} className="google-slot" />
+              <div className="login-divider"><span>or continue with email</span></div>
+            </>
           )}
-          <div className="fgroup">
-            <label className="flabel">Email</label>
-            <input type="email" className="finput" value={email} required
-              onChange={(e) => setEmail(e.target.value)} />
-          </div>
-          <div className="fgroup">
-            <label className="flabel">Password</label>
-            <input type="password" className="finput" value={password} required minLength={8}
-              onChange={(e) => setPassword(e.target.value)} />
-          </div>
-          {error && <p style={{ color: '#e5484d', fontSize: 14 }}>{error}</p>}
-          <div className="btn-row">
-            <button type="submit" className="btn-scan" disabled={busy}>
-              {busy ? 'Please wait…' : mode === 'login' ? 'Log in' : 'Sign up'}
+
+          <form onSubmit={submit} className="login-form">
+            {!isLogin && (
+              <div className="fgroup">
+                <label className="flabel">Name</label>
+                <input className="finput" value={name} autoComplete="name"
+                  onChange={(e) => setName(e.target.value)} />
+              </div>
+            )}
+            <div className="fgroup">
+              <label className="flabel">Email</label>
+              <input type="email" className="finput" value={email} required autoComplete="email"
+                onChange={(e) => setEmail(e.target.value)} />
+            </div>
+            <div className="fgroup">
+              <label className="flabel">Password</label>
+              <input type="password" className="finput" value={password} required minLength={8}
+                autoComplete={isLogin ? 'current-password' : 'new-password'}
+                onChange={(e) => setPassword(e.target.value)} />
+              {!isLogin && <span className="login-hint">At least 8 characters.</span>}
+            </div>
+            {error && <p className="login-error" role="alert">{error}</p>}
+            <button type="submit" className="login-submit" disabled={busy}>
+              {busy ? 'Please wait…' : isLogin ? 'Log in' : 'Create account'}
             </button>
-          </div>
-        </form>
-        <p style={{ marginTop: 14, fontSize: 14 }}>
-          {mode === 'login' ? 'No account? ' : 'Already registered? '}
-          <button type="button" className="nav-btn"
-            onClick={() => { setError(null); setMode(mode === 'login' ? 'register' : 'login') }}>
-            {mode === 'login' ? 'Sign up' : 'Log in'}
-          </button>
-        </p>
-      </div>
+          </form>
+
+          <p className="login-switch">
+            {isLogin ? "Don't have an account? " : 'Already registered? '}
+            <button type="button" className="link-btn"
+              onClick={() => { setError(null); setMode(isLogin ? 'register' : 'login') }}>
+              {isLogin ? 'Sign up' : 'Log in'}
+            </button>
+          </p>
+        </div>
+      </section>
     </div>
   )
 }

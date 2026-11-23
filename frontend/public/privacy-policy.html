@@ -4,92 +4,94 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WebGuard | Privacy Policy</title>
-    <style>
-      :root {
-        --bg: #f4f8f7;
-        --card: #ffffff;
-        --text: #1f2a37;
-        --muted: #526173;
-        --line: #d6e2df;
-        --brand: #2f8f87;
-      }
-      * {
-        box-sizing: border-box;
-      }
-      body {
-        margin: 0;
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        background: linear-gradient(180deg, #e9f4f2 0%, var(--bg) 100%);
-        color: var(--text);
-      }
-      .wrap {
-        max-width: 860px;
-        margin: 0 auto;
-        padding: 36px 20px;
-      }
-      h1 {
-        margin: 0 0 8px;
-        font-size: 30px;
-      }
-      p.lead {
-        margin: 0 0 24px;
-        color: var(--muted);
-      }
-      .item {
-        background: var(--card);
-        border: 1px solid var(--line);
-        border-radius: 12px;
-        padding: 16px;
-        margin-bottom: 12px;
-      }
-      h3 {
-        margin: 0 0 8px;
-        color: var(--brand);
-        font-size: 16px;
-      }
-      p {
-        margin: 0;
-        line-height: 1.6;
-        color: var(--muted);
-      }
-      a.back {
-        display: inline-block;
-        margin-top: 14px;
-        color: var(--brand);
-        text-decoration: none;
-      }
-    </style>
+    <link rel="stylesheet" href="/legal.css" />
   </head>
   <body>
-    <main class="wrap">
+    <div class="topbar"><a href="/">Web<span>Guard</span></a></div>
+    <header class="hero">
+      <div class="emoji">🕵️</div>
       <h1>Privacy Policy</h1>
-      <p class="lead">How scan data and credentials are handled.</p>
+      <p>
+        We're a security tool, so snooping on you would be pretty awkward. Here's
+        exactly what we keep, what we don't, and why.
+      </p>
+      <span class="stamp">Plain English edition</span>
+    </header>
+
+    <main class="wrap">
+      <div class="tldr">
+        <strong>TL;DR:</strong> We keep what we need to run your scans and show
+        your results. We don't sell your data, we don't run ads, and we never
+        store the passwords you give us for scanning.
+      </div>
 
       <section class="item">
-        <h3>Collected data</h3>
-        <p>
-          WebGuard stores scan target details and findings needed for reporting.
-        </p>
+        <div class="ico">🙋</div>
+        <div>
+          <h3>Your account</h3>
+          <p>
+            Sign up with email or Google and we store your email, your name (if
+            you gave one) and a securely hashed password. "Hashed" means even we
+            can't read it. If you use Google, we only receive the basics Google
+            shares for sign-in.
+          </p>
+        </div>
       </section>
       <section class="item">
-        <h3>Data location</h3>
-        <p>Stored data stays in your local or configured project database.</p>
+        <div class="ico">🎯</div>
+        <div>
+          <h3>Scan data</h3>
+          <p>
+            We save the target URL, scan status and findings so you can read
+            your results later. It's your report card, so we keep it for you.
+          </p>
+        </div>
       </section>
       <section class="item">
-        <h3>Credentials</h3>
-        <p>
-          Credentials are used only during authenticated scans and are not
-          persisted as long-term records.
-        </p>
+        <div class="ico">🔑</div>
+        <div>
+          <h3>Credentials for authenticated scans</h3>
+          <p>
+            The login details you enter to scan behind a login page are used
+            during that scan only. They're not kept as long-term records.
+          </p>
+        </div>
       </section>
       <section class="item">
-        <h3>Cookies and sessions</h3>
-        <p>
-          Temporary session cookies may be used during login flows for scanning.
-        </p>
+        <div class="ico">🍪</div>
+        <div>
+          <h3>Cookies &amp; sessions</h3>
+          <p>
+            No tracking cookies. Your login token lives in your browser's local
+            storage so you stay signed in, and it's cleared when you log out.
+            The scanner may use temporary session cookies while it logs in to
+            your target.
+          </p>
+        </div>
+      </section>
+      <section class="item">
+        <div class="ico">🗄️</div>
+        <div>
+          <h3>Where it lives</h3>
+          <p>
+            Your data sits in the project's configured database. We don't share
+            it with advertisers, data brokers or anyone else.
+          </p>
+        </div>
+      </section>
+      <section class="item">
+        <div class="ico">🧹</div>
+        <div>
+          <h3>Want it gone?</h3>
+          <p>
+            Ask and we'll delete your account and scan history. Find how on the
+            <a href="/contact.html">contact page</a>.
+          </p>
+        </div>
       </section>
 
-      <a class="back" href="/">Return to WebGuard</a>
+      <p class="fine">WebGuard is a student project, so this policy is written in good faith, not by a law firm.</p>
+      <p class="center"><a class="back" href="/">← Back to WebGuard</a></p>
     </main>
   </body>
 </html>

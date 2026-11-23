@@ -4,93 +4,82 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WebGuard | Contact</title>
-    <style>
-      :root {
-        --bg: #f4f8f7;
-        --card: #ffffff;
-        --text: #1f2a37;
-        --muted: #526173;
-        --line: #d6e2df;
-        --brand: #2f8f87;
-      }
-      * {
-        box-sizing: border-box;
-      }
-      body {
-        margin: 0;
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        background: linear-gradient(180deg, #e9f4f2 0%, var(--bg) 100%);
-        color: var(--text);
-      }
-      .wrap {
-        max-width: 860px;
-        margin: 0 auto;
-        padding: 36px 20px;
-      }
-      h1 {
-        margin: 0 0 8px;
-        font-size: 30px;
-      }
-      p.lead {
-        margin: 0 0 24px;
-        color: var(--muted);
-      }
-      .item {
-        background: var(--card);
-        border: 1px solid var(--line);
-        border-radius: 12px;
-        padding: 16px;
-        margin-bottom: 12px;
-      }
-      h3 {
-        margin: 0 0 8px;
-        color: var(--brand);
-        font-size: 16px;
-      }
-      p {
-        margin: 0;
-        line-height: 1.6;
-        color: var(--muted);
-      }
-      a.back {
-        display: inline-block;
-        margin-top: 14px;
-        color: var(--brand);
-        text-decoration: none;
-      }
-    </style>
+    <link rel="stylesheet" href="/legal.css" />
   </head>
   <body>
+    <div class="topbar"><a href="/">Web<span>Guard</span></a></div>
+    <header class="hero">
+      <div class="emoji">👋</div>
+      <h1>Say hello</h1>
+      <p>
+        Questions, bug reports, feature ideas or just a friendly wave. We're a
+        small team and we actually read everything.
+      </p>
+      <span class="stamp">No bots on the other end</span>
+    </header>
+
     <main class="wrap">
-      <h1>Contact</h1>
-      <p class="lead">Reach out to the WebGuard project team.</p>
+      <div class="tldr">
+        <strong>TL;DR:</strong> The fastest way to reach us is the project
+        repository on GitHub. Open an issue and we'll take it from there.
+      </div>
 
       <section class="item">
-        <h3>Project team</h3>
-        <p>
-          WebGuard is a student project from Tribhuvan University, BSc CSIT 7th
-          semester.
-        </p>
+        <div class="ico">🎓</div>
+        <div>
+          <h3>Who we are</h3>
+          <p>
+            WebGuard is a student project from Tribhuvan University, BSc CSIT
+            7th semester. Real students, real coffee, real deadlines.
+          </p>
+        </div>
       </section>
       <section class="item">
-        <h3>Frontend support</h3>
-        <p>Contact the frontend contributor for UI and client-side issues.</p>
+        <div class="ico">🐙</div>
+        <div>
+          <h3>GitHub (best option)</h3>
+          <p>
+            Open an issue on the
+            <a href="https://github.com/smriti-sapkota/WebGuard" target="_blank" rel="noopener">WebGuard repository</a>
+            for bugs, ideas and questions. The README also has setup and
+            contribution details.
+          </p>
+        </div>
       </section>
       <section class="item">
-        <h3>Backend support</h3>
-        <p>
-          Contact the backend contributor for API or scanner service issues.
-        </p>
+        <div class="ico">🎨</div>
+        <div>
+          <h3>Something looks off?</h3>
+          <p>
+            Wonky layout or a button that won't click? Tell us your browser and
+            what you were doing. Screenshots make us very happy.
+          </p>
+        </div>
       </section>
       <section class="item">
-        <h3>Repository</h3>
-        <p>
-          Use the project repository and README for setup and contribution
-          details.
-        </p>
+        <div class="ico">⚙️</div>
+        <div>
+          <h3>Scanner acting weird?</h3>
+          <p>
+            Scan stuck or a result that looks wrong? Include the target type
+            (never your passwords!) and the scan ID from the Scanner page.
+          </p>
+        </div>
+      </section>
+      <section class="item">
+        <div class="ico">🔒</div>
+        <div>
+          <h3>Security issues &amp; data requests</h3>
+          <p>
+            For vulnerabilities, see our <a href="/security.html">security page</a>.
+            To delete your account, mention it in a GitHub issue without
+            posting private details, and we'll sort out the rest.
+          </p>
+        </div>
       </section>
 
-      <a class="back" href="/">Return to WebGuard</a>
+      <p class="fine">We usually reply within a few days. Student schedules are unpredictable.</p>
+      <p class="center"><a class="back" href="/">← Back to WebGuard</a></p>
     </main>
   </body>
 </html>

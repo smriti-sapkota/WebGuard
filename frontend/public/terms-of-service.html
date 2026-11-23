@@ -4,95 +4,94 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WebGuard | Terms of Service</title>
-    <style>
-      :root {
-        --bg: #f4f8f7;
-        --card: #ffffff;
-        --text: #1f2a37;
-        --muted: #526173;
-        --line: #d6e2df;
-        --brand: #2f8f87;
-      }
-      * {
-        box-sizing: border-box;
-      }
-      body {
-        margin: 0;
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        background: linear-gradient(180deg, #e9f4f2 0%, var(--bg) 100%);
-        color: var(--text);
-      }
-      .wrap {
-        max-width: 860px;
-        margin: 0 auto;
-        padding: 36px 20px;
-      }
-      h1 {
-        margin: 0 0 8px;
-        font-size: 30px;
-      }
-      p.lead {
-        margin: 0 0 24px;
-        color: var(--muted);
-      }
-      .item {
-        background: var(--card);
-        border: 1px solid var(--line);
-        border-radius: 12px;
-        padding: 16px;
-        margin-bottom: 12px;
-      }
-      h3 {
-        margin: 0 0 8px;
-        color: var(--brand);
-        font-size: 16px;
-      }
-      p {
-        margin: 0;
-        line-height: 1.6;
-        color: var(--muted);
-      }
-      a.back {
-        display: inline-block;
-        margin-top: 14px;
-        color: var(--brand);
-        text-decoration: none;
-      }
-    </style>
+    <link rel="stylesheet" href="/legal.css" />
   </head>
   <body>
-    <main class="wrap">
+    <div class="topbar"><a href="/">Web<span>Guard</span></a></div>
+    <header class="hero">
+      <div class="emoji">📜</div>
       <h1>Terms of Service</h1>
-      <p class="lead">Rules and limitations for using WebGuard.</p>
+      <p>
+        The rules of the road, minus the legalese. Short version: be a good
+        human and only scan what's yours.
+      </p>
+      <span class="stamp">Plain English edition</span>
+    </header>
+
+    <main class="wrap">
+      <div class="tldr">
+        <strong>TL;DR:</strong> Scan only your own stuff (or stuff you have
+        written permission for), don't break things on purpose, and remember
+        we're a learning project, not a guarantee.
+      </div>
 
       <section class="item">
-        <h3>Authorized use only</h3>
-        <p>
-          Scan only systems you own or have explicit written permission to test.
-        </p>
+        <div class="ico">✅</div>
+        <div>
+          <h3>Authorized use only</h3>
+          <p>
+            Only scan systems you own or have explicit written permission to
+            test. Scanning someone else's site without a yes isn't "curiosity",
+            it can be illegal. Don't be that person.
+          </p>
+        </div>
       </section>
       <section class="item">
-        <h3>No warranty</h3>
-        <p>
-          The software is provided as is without guarantees of full
-          vulnerability coverage.
-        </p>
+        <div class="ico">🚫</div>
+        <div>
+          <h3>No funny business</h3>
+          <p>
+            No attacking others, no overloading servers, and no pointing
+            WebGuard at private or internal networks. We block those requests,
+            and trying to get around the blocks breaks these terms.
+          </p>
+        </div>
       </section>
       <section class="item">
-        <h3>User responsibility</h3>
-        <p>
-          You are responsible for legal and ethical use of scanning features.
-        </p>
+        <div class="ico">🧪</div>
+        <div>
+          <h3>Smoke alarm, not a fire inspector</h3>
+          <p>
+            WebGuard finds common issues (SQL injection, XSS, CSRF). A clean
+            report doesn't mean your app is bulletproof, so keep testing.
+          </p>
+        </div>
       </section>
       <section class="item">
-        <h3>Educational purpose</h3>
-        <p>
-          This project is suitable for learning and controlled security testing
-          environments.
-        </p>
+        <div class="ico">🤷</div>
+        <div>
+          <h3>No warranty</h3>
+          <p>
+            The software is provided "as is", with no promises of full
+            vulnerability coverage or that it'll never glitch. We're not liable
+            for any fallout from scans you run.
+          </p>
+        </div>
+      </section>
+      <section class="item">
+        <div class="ico">🧑‍⚖️</div>
+        <div>
+          <h3>You're responsible</h3>
+          <p>
+            You answer for how you use WebGuard and its results. Fix problems,
+            don't exploit them. Keep your account password to yourself too.
+          </p>
+        </div>
+      </section>
+      <section class="item">
+        <div class="ico">🎓</div>
+        <div>
+          <h3>Made for learning</h3>
+          <p>
+            WebGuard is a student project, great for study and controlled
+            testing labs. We may change these terms as it grows, so check back
+            now and then. See also our <a href="/privacy-policy.html">Privacy Policy</a>.
+          </p>
+        </div>
       </section>
 
-      <a class="back" href="/">Return to WebGuard</a>
+      <p class="fine">By using WebGuard you agree to the above. Questions? <a href="/contact.html">Say hi</a>.</p>
+      <p class="center"><a class="back" href="/">← Back to WebGuard</a></p>
     </main>
   </body>
 </html>

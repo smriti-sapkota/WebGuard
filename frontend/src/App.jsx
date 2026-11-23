@@ -7,6 +7,7 @@ import HomePage from "./pages/HomePage";
 import ScannerPage from "./pages/ScannerPage";
 import ResultsPage from "./pages/ResultsPage";
 import useScan from "./hooks/useScan";
+import "./home.css";
 
 export default function App() {
   const [page, setPage] = useState("home");
@@ -52,6 +53,7 @@ export default function App() {
           status={status}
           target={target}
           updatedAt={updatedAt}
+          setPage={setPage}
         />
       )}
 

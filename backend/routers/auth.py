@@ -91,6 +91,12 @@ def google_login(body: GoogleIn, session: SESSION_LOCAL):
     return _out(user)
 
 
+@router.get("/config")
+def auth_config():
+    # Public value; lets the hosted frontend show Google sign-in without a rebuild.
+    return {"google_client_id": settings.GOOGLE_CLIENT_ID}
+
+
 @router.get("/me", response_model=UserOut)
 def me(user: User = Depends(get_current_user)):
     return UserOut(id=user.id, email=user.email, name=user.name)

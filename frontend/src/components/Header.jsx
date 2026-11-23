@@ -1,6 +1,7 @@
+import { useEffect, useRef, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 
-const ShieldIcon =({ size = 16 }) => (
+const ShieldIcon = ({ size = 16 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
     <path
       d="M12 2L3 6v6c0 5.25 3.9 10.15 9 11.35C17.1 17.15 21 12.25 21 12V6L12 2Z"
@@ -18,6 +19,67 @@ const ShieldIcon =({ size = 16 }) => (
     />
   </svg>
 );
+
+function ProfileMenu({ user, onLogout }) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef(null);
+  const label = (user.name || user.email || "?").trim();
+  const initial = label.charAt(0).toUpperCase();
+
+  useEffect(() => {
+    if (!open) return;
+    const close = (e) => {
+      if (ref.current && !ref.current.contains(e.target)) setOpen(false);
+    };
+    const esc = (e) => e.key === "Escape" && setOpen(false);
+    document.addEventListener("mousedown", close);
+    document.addEventListener("keydown", esc);
+    return () => {
+      document.removeEventListener("mousedown", close);
+      document.removeEventListener("keydown", esc);
+    };
+  }, [open]);
+
+  return (
+    <div className="profile" ref={ref}>
+      <button
+        className="avatar"
+        onClick={() => setOpen((o) => !o)}
+        aria-haspopup="menu"
+        aria-expanded={open}
+        title={user.email}
+      >
+        {initial}
+      </button>
+      {open && (
+        <div className="profile-menu" role="menu">
+          <div className="profile-info">
+            <div className="avatar avatar-lg">{initial}</div>
+            <div className="profile-text">
+              {user.name && <div className="profile-name">{user.name}</div>}
+              <div className="profile-email">{user.email}</div>
+            </div>
+          </div>
+          <button
+            className="profile-logout"
+            role="menuitem"
+            onClick={() => {
+              setOpen(false);
+              onLogout();
+            }}
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+              <polyline points="16 17 21 12 16 7" />
+              <line x1="21" y1="12" x2="9" y2="12" />
+            </svg>
+            Log out
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
 
 export default function Header({ page, setPage }) {
   const { user, logout } = useAuth();
@@ -51,19 +113,16 @@ export default function Header({ page, setPage }) {
             </button>
           ))}
           {user ? (
-            <button
-              className="nav-btn"
-              title={user.email}
-              onClick={() => {
+            <ProfileMenu
+              user={user}
+              onLogout={() => {
                 logout();
                 setPage("home");
               }}
-            >
-              Log out
-            </button>
+            />
           ) : (
             <button
-              className={`nav-btn ${page === "login" ? "active" : ""}`}
+              className={`nav-btn nav-login ${page === "login" ? "active" : ""}`}
               onClick={() => setPage("login")}
             >
               Log in

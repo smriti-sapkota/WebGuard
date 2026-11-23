@@ -4,89 +4,84 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WebGuard | Security</title>
-    <style>
-      :root {
-        --bg: #f4f8f7;
-        --card: #ffffff;
-        --text: #1f2a37;
-        --muted: #526173;
-        --line: #d6e2df;
-        --brand: #2f8f87;
-      }
-      * {
-        box-sizing: border-box;
-      }
-      body {
-        margin: 0;
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        background: linear-gradient(180deg, #e9f4f2 0%, var(--bg) 100%);
-        color: var(--text);
-      }
-      .wrap {
-        max-width: 860px;
-        margin: 0 auto;
-        padding: 36px 20px;
-      }
-      h1 {
-        margin: 0 0 8px;
-        font-size: 30px;
-      }
-      p.lead {
-        margin: 0 0 24px;
-        color: var(--muted);
-      }
-      .item {
-        background: var(--card);
-        border: 1px solid var(--line);
-        border-radius: 12px;
-        padding: 16px;
-        margin-bottom: 12px;
-      }
-      h3 {
-        margin: 0 0 8px;
-        color: var(--brand);
-        font-size: 16px;
-      }
-      p {
-        margin: 0;
-        line-height: 1.6;
-        color: var(--muted);
-      }
-      a.back {
-        display: inline-block;
-        margin-top: 14px;
-        color: var(--brand);
-        text-decoration: none;
-      }
-    </style>
+    <link rel="stylesheet" href="/legal.css" />
   </head>
   <body>
-    <main class="wrap">
+    <div class="topbar"><a href="/">Web<span>Guard</span></a></div>
+    <header class="hero">
+      <div class="emoji">🛡️</div>
       <h1>Security</h1>
-      <p class="lead">Policy and scope for WebGuard security testing.</p>
+      <p>
+        A scanner that's careless about its own security would be embarrassing.
+        Here's how we keep WebGuard (and you) safe.
+      </p>
+      <span class="stamp">Practice what we scan</span>
+    </header>
+
+    <main class="wrap">
+      <div class="tldr">
+        <strong>TL;DR:</strong> We test gently, guard the scanner against
+        misuse, protect your account, and welcome responsible bug reports.
+      </div>
 
       <section class="item">
-        <h3>Responsible disclosure</h3>
-        <p>
-          Report potential product issues privately to the maintainers first.
-        </p>
+        <div class="ico">🎯</div>
+        <div>
+          <h3>What we look for</h3>
+          <p>
+            SQL Injection, reflected and stored XSS, and CSRF. We're focused,
+            not all-knowing, and more checks may come later.
+          </p>
+        </div>
       </section>
       <section class="item">
-        <h3>Current scan scope</h3>
-        <p>
-          WebGuard currently focuses on SQL Injection, reflected and stored XSS,
-          and CSRF checks.
-        </p>
+        <div class="ico">🪶</div>
+        <div>
+          <h3>Gentle by design</h3>
+          <p>
+            The scanner sends test payloads and reports what it sees. It does
+            not perform destructive exploitation, so it knocks on the door
+            rather than kicking it in.
+          </p>
+        </div>
       </section>
       <section class="item">
-        <h3>Safe operation</h3>
-        <p>
-          The scanner sends test payloads and reports findings. It does not
-          perform destructive exploitation.
-        </p>
+        <div class="ico">🧱</div>
+        <div>
+          <h3>Guardrails on the scanner</h3>
+          <p>
+            Requests to private and internal addresses are blocked
+            (anti-SSRF), and scan requests are rate limited, so WebGuard can't
+            easily be turned into a weapon.
+          </p>
+        </div>
+      </section>
+      <section class="item">
+        <div class="ico">🔐</div>
+        <div>
+          <h3>Your account</h3>
+          <p>
+            Passwords are stored hashed, never in plain text. Sessions use
+            signed tokens, and you can sign in with Google instead of a
+            password if you prefer.
+          </p>
+        </div>
+      </section>
+      <section class="item">
+        <div class="ico">🐛</div>
+        <div>
+          <h3>Found a bug in WebGuard?</h3>
+          <p>
+            Awesome, and thank you! Please report it privately to the
+            maintainers first (see <a href="/contact.html">contact</a>) and
+            give us a fair chance to fix it before sharing it publicly. No
+            public shaming, just teamwork.
+          </p>
+        </div>
       </section>
 
-      <a class="back" href="/">Return to WebGuard</a>
+      <p class="fine">Security is a journey, and we're still learning. Thanks for helping us get better.</p>
+      <p class="center"><a class="back" href="/">← Back to WebGuard</a></p>
     </main>
   </body>
 </html>

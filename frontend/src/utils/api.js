@@ -43,6 +43,18 @@ export async function authRequest(path, body) {
   return res.json()
 }
 
+export async function fetchGoogleClientId() {
+  const fallback = import.meta.env.VITE_GOOGLE_CLIENT_ID || null
+  try {
+    const res = await fetch(`${API_BASE}/auth/config`)
+    if (!res.ok) return fallback
+    const data = await res.json()
+    return data.google_client_id || fallback
+  } catch {
+    return fallback
+  }
+}
+
 export async function fetchMe() {
   const res = await fetch(`${API_BASE}/auth/me`, { headers: authHeaders() })
   if (!res.ok) throw new Error('not logged in')

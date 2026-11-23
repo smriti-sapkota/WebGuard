@@ -52,7 +52,7 @@ body {
   z-index: 200;
 }
 .header-inner {
-  max-width: 1080px;
+  max-width: 1240px;
   margin: 0 auto;
   padding: 0 28px;
   height: 58px;
@@ -126,7 +126,7 @@ body {
 
 /* ─── HOME ───────────────────────────────── */
 .home-hero {
-  max-width: 1080px;
+  max-width: 1240px;
   margin: 0 auto;
   padding: 72px 28px 64px;
   display: grid;
@@ -249,7 +249,7 @@ body {
   border-bottom: 1px solid var(--border);
 }
 .stat-strip-inner {
-  max-width: 1080px;
+  max-width: 1240px;
   margin: 0 auto;
   padding: 28px;
   display: grid;
@@ -279,7 +279,7 @@ body {
 }
 
 .vuln-section {
-  max-width: 1080px;
+  max-width: 1240px;
   margin: 0 auto;
   padding: 56px 28px;
 }
@@ -342,7 +342,7 @@ body {
 
 /* ─── SCANNER PAGE ───────────────────────── */
 .scanner-wrap {
-  max-width: 1080px;
+  max-width: 1240px;
   margin: 0 auto;
   padding: 36px 28px;
 }
@@ -595,7 +595,7 @@ body {
 
 /* ─── RESULTS PAGE ───────────────────────── */
 .results-wrap {
-  max-width: 1080px;
+  max-width: 1240px;
   margin: 0 auto;
   padding: 36px 28px;
 }
@@ -803,7 +803,7 @@ body {
   margin-top: auto;
 }
 .footer-inner {
-  max-width: 1080px;
+  max-width: 1240px;
   margin: 0 auto;
   padding: 36px 28px 28px;
   display: grid;
@@ -870,7 +870,7 @@ body {
   color: #4f7cac;
 }
 .footer-bottom {
-  max-width: 1080px;
+  max-width: 1240px;
   margin: 0 auto;
   padding: 16px 28px;
   border-top: 1px solid var(--border);
@@ -954,5 +954,19 @@ body {
   }
   .home-hero {
     padding: 32px 16px;
+  }
+}
+
+/* ─── LARGE SCREENS: scale UI up so it fills the viewport ─── */
+@media (min-width: 1200px) {
+  #root {
+    zoom: 1.2;
+    min-height: calc(100vh / 1.2);
+  }
+}
+@media (min-width: 1600px) {
+  #root {
+    zoom: 1.35;
+    min-height: calc(100vh / 1.35);
   }
 }

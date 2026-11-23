@@ -27,7 +27,9 @@ export default function ScannerPage({
   status,
   target,
   updatedAt,
+  setPage,
 }) {
+  const finished = String(status || "").toLowerCase() === "completed";
   return (
     <div className="scanner-wrap">
       <div className="page-head">
@@ -35,6 +37,27 @@ export default function ScannerPage({
         <p>Configure your target and authentication, then start a scan.</p>
       </div>
       <div className="hr" />
+
+      {finished && (
+        <div className="done-banner" role="status">
+          <div className="done-text">
+            <span className="done-check">✓</span>
+            <div>
+              <strong>Scan complete!</strong>
+              <span> Your findings are ready — take a look at the results.</span>
+            </div>
+          </div>
+          <button
+            className="done-btn"
+            onClick={() => {
+              setPage("results");
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
+          >
+            View Results →
+          </button>
+        </div>
+      )}
 
       <div className="scanner-grid">
         {/* ── Form ── */}
@@ -190,7 +213,7 @@ export default function ScannerPage({
             )}
 
             <div className="btn-row">
-              <button type="submit" className="btn-scan" disabled={scanning}>
+              <button type="submit" className="btn-scan btn-scan-big" disabled={scanning}>
                 {scanning ? (
                   <>
                     <span className="pulse">●</span> Scanning…
