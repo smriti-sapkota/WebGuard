@@ -88,15 +88,15 @@ DESCRIPTION = (
 
 FIX = """Use parameterized queries (prepared statements) — NEVER build SQL strings by concatenating user input.
 
-❌ Vulnerable (Python):
+✗ Vulnerable (Python):
     query = "SELECT * FROM users WHERE username = '" + username + "'"
     cursor.execute(query)
 
-✅ Fixed (Python with psycopg2 / SQLModel):
+✓ Fixed (Python with psycopg2 / SQLModel):
     query = "SELECT * FROM users WHERE username = %s"
     cursor.execute(query, (username,))
 
-✅ Fixed (SQLModel ORM — safest approach):
+✓ Fixed (SQLModel ORM — safest approach):
     user = session.exec(select(User).where(User.username == username)).first()
 
 The key principle: keep SQL code and user data completely separate.

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import Icon from "../components/Icon";
 import scannerImg from "../assets/scanner.jpg";
 
 const STATS = [
@@ -10,17 +11,17 @@ const STATS = [
 
 const VULNS = [
   {
-    icon: "🔍",
+    icon: "search",
     name: "SQL Injection",
     desc: "Error-based, boolean-based, and time-based blind SQLi across all form inputs and URL parameters.",
   },
   {
-    icon: "⚡",
+    icon: "zap",
     name: "Cross-Site Scripting",
     desc: "Reflected and stored XSS by injecting and verifying payloads in HTTP responses automatically.",
   },
   {
-    icon: "🛡",
+    icon: "shield",
     name: "CSRF",
     desc: "State-changing forms are checked for missing or weak anti-CSRF tokens across authenticated sessions.",
   },
@@ -28,22 +29,22 @@ const VULNS = [
 
 const STEPS = [
   {
-    icon: "🎯",
+    icon: "target",
     title: "Point it at a target",
     desc: "Paste the URL of a site you own. Got a login wall? Add credentials and WebGuard walks through the front door like a real user.",
   },
   {
-    icon: "🕷",
+    icon: "bug",
     title: "We crawl & poke",
     desc: "A friendly spider maps every page, form and parameter, then throws harmless test payloads at them. Nothing gets broken or stored.",
   },
   {
-    icon: "📡",
+    icon: "activity",
     title: "Watch it live",
     desc: "Status updates roll in every few seconds, so you're never staring at a spinner wondering if it's alive.",
   },
   {
-    icon: "📋",
+    icon: "clipboard",
     title: "Read the verdict",
     desc: "Findings land in the Results page ranked High, Medium and Low, with what we found, where, and how to fix it.",
   },
@@ -51,22 +52,22 @@ const STEPS = [
 
 const LEGAL = [
   {
-    icon: "✅",
+    icon: "check",
     title: "Only scan what's yours",
     desc: "Scan sites you own or have written permission to test. Poking at someone else's server without a yes isn't a hack, it's a crime.",
   },
   {
-    icon: "🔒",
+    icon: "lock",
     title: "Your secrets stay secret",
     desc: "Passwords you give us are used for the scan and nothing else. We don't sell data, and we don't peek.",
   },
   {
-    icon: "🧪",
+    icon: "flask",
     title: "Safe, but not magic",
     desc: "WebGuard finds common issues, not every issue. Think of it as a smoke alarm, not a full fire inspection.",
   },
   {
-    icon: "🤝",
+    icon: "users",
     title: "You're the grown-up",
     desc: "You're responsible for how you use the results. Fix things, don't exploit them. Deal?",
   },
@@ -193,8 +194,8 @@ export default function HomePage({ setPage }) {
           />
           <div className="home-img-overlay" />
           <div className="scan-line" />
-          <div className="float-chip chip-a">✔ No XSS found</div>
-          <div className="float-chip chip-b">⚠ 2 issues</div>
+          <div className="float-chip chip-a"><Icon name="check" size={13} /> No XSS found</div>
+          <div className="float-chip chip-b"><Icon name="alert" size={13} /> 2 issues</div>
         </div>
       </div>
 
@@ -231,7 +232,7 @@ export default function HomePage({ setPage }) {
           {VULNS.map((v, i) => (
             <Reveal key={v.name} delay={i * 110}>
               <div className="vuln-card">
-                <div className="vuln-icon">{v.icon}</div>
+                <div className="vuln-icon"><Icon name={v.icon} size={28} /></div>
                 <div className="vuln-name">{v.name}</div>
                 <div className="vuln-desc">{v.desc}</div>
               </div>
@@ -252,7 +253,7 @@ export default function HomePage({ setPage }) {
               <Reveal key={s.title} delay={i * 120}>
                 <div className="step">
                   <div className="step-num">{i + 1}</div>
-                  <div className="step-icon">{s.icon}</div>
+                  <div className="step-icon"><Icon name={s.icon} size={28} /></div>
                   <div className="vuln-name">{s.title}</div>
                   <div className="vuln-desc">{s.desc}</div>
                 </div>
@@ -272,7 +273,7 @@ export default function HomePage({ setPage }) {
           {LEGAL.map((l, i) => (
             <Reveal key={l.title} delay={i * 100}>
               <div className="legal-card">
-                <div className="legal-icon">{l.icon}</div>
+                <div className="legal-icon"><Icon name={l.icon} size={26} /></div>
                 <div>
                   <div className="vuln-name">{l.title}</div>
                   <div className="vuln-desc">{l.desc}</div>

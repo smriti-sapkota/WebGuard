@@ -35,24 +35,24 @@ CSRF_DESCRIPTION = (
 
 CSRF_FIX = """Add a CSRF token to every state-changing form (POST, PUT, DELETE).
 
-✅ Django (built-in — just add the template tag):
+✓ Django (built-in — just add the template tag):
     <form method="post">
         {% csrf_token %}
         ...
     </form>
 
-✅ Laravel (built-in — add @csrf directive):
+✓ Laravel (built-in — add @csrf directive):
     <form method="POST">
         @csrf
         ...
     </form>
 
-✅ Express.js (use csurf middleware):
+✓ Express.js (use csurf middleware):
     const csrf = require('csurf');
     app.use(csrf());
     // In your template: <input type="hidden" name="_csrf" value="{{ csrfToken }}">
 
-✅ Generic (manual implementation principle):
+✓ Generic (manual implementation principle):
     # Server: generate a random token, store in session
     import secrets
     session['csrf_token'] = secrets.token_hex(32)
@@ -72,13 +72,13 @@ SAMESITE_DESCRIPTION = (
 
 SAMESITE_FIX = """Set the SameSite attribute on all session cookies.
 
-✅ Django (settings.py):
+✓ Django (settings.py):
     SESSION_COOKIE_SAMESITE = 'Lax'   # or 'Strict' for maximum protection
 
-✅ Flask:
+✓ Flask:
     app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
 
-✅ Express.js:
+✓ Express.js:
     app.use(session({
         cookie: { sameSite: 'lax' }
     }));
@@ -94,17 +94,17 @@ XFRAME_DESCRIPTION = (
 
 XFRAME_FIX = """Add X-Frame-Options to all responses.
 
-✅ Django (settings.py):
+✓ Django (settings.py):
     MIDDLEWARE = [..., 'django.middleware.clickjacking.XFrameOptionsMiddleware']
     X_FRAME_OPTIONS = 'DENY'
 
-✅ Flask:
+✓ Flask:
     @app.after_request
     def set_headers(response):
         response.headers['X-Frame-Options'] = 'DENY'
         return response
 
-✅ Nginx:
+✓ Nginx:
     add_header X-Frame-Options "DENY";
 
 DENY        → Page cannot be framed at all (most secure)
@@ -118,16 +118,16 @@ CSP_DESCRIPTION = (
 
 CSP_FIX = """Add a Content-Security-Policy header.
 
-✅ Starter policy (safe default):
+✓ Starter policy (safe default):
     Content-Security-Policy: default-src 'self'; script-src 'self'; object-src 'none'
 
-✅ Flask:
+✓ Flask:
     @app.after_request
     def set_csp(response):
         response.headers['Content-Security-Policy'] = "default-src 'self'"
         return response
 
-✅ Django (use django-csp package):
+✓ Django (use django-csp package):
     pip install django-csp
     # settings.py:
     CSP_DEFAULT_SRC = ("'self'",)

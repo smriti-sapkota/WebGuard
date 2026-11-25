@@ -11,7 +11,7 @@
 @keyframes floaty { 50% { transform: translateY(-8px); } }
 .scan-line { position: absolute; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, transparent, var(--highlight), transparent); box-shadow: 0 0 14px var(--highlight); animation: scan 3.5s ease-in-out infinite; }
 @keyframes scan { 0%,100% { top: 4%; } 50% { top: 94%; } }
-.float-chip { position: absolute; font-family: "DM Mono", monospace; font-size: 11px; background: #fff; border: 1px solid var(--green-border); border-radius: 20px; padding: 6px 12px; box-shadow: var(--shadow); animation: floaty 4s ease-in-out infinite; }
+.float-chip { display: inline-flex; align-items: center; gap: 5px; position: absolute; font-family: "DM Mono", monospace; font-size: 11px; background: #fff; border: 1px solid var(--green-border); border-radius: 20px; padding: 6px 12px; box-shadow: var(--shadow); animation: floaty 4s ease-in-out infinite; }
 .chip-a { top: 14px; left: 14px; color: var(--low); }
 .chip-b { bottom: 14px; right: 14px; color: #a56a10; animation-delay: -2s; }
 
@@ -28,7 +28,8 @@
 .section-eyebrow { font-family: "DM Mono", monospace; font-size: 12px; text-transform: uppercase; letter-spacing: .1em; color: var(--highlight); margin-bottom: 6px; font-weight: 600; }
 .vuln-card { height: 100%; transition: border-color .15s, box-shadow .15s, transform .25s; }
 .vuln-card:hover, .step:hover, .legal-card:hover { transform: translateY(-4px); }
-.vuln-icon { transition: transform .3s; }
+.vuln-icon { transition: transform .3s; color: var(--green, #34a853); display: inline-block; }
+.step-icon, .legal-icon { color: var(--green, #34a853); }
 .vuln-card:hover .vuln-icon, .step:hover .step-icon, .legal-card:hover .legal-icon { transform: scale(1.18) rotate(-6deg); }
 
 .band { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }

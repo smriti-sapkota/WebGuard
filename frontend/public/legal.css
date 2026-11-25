@@ -117,3 +117,8 @@ a.back:hover { background: var(--brand-dark); transform: translateY(-2px); }
   .hero .emoji { animation: none; }
 }
 @media (max-width: 600px) { .hero h1 { font-size: 28px; } }
+
+/* Professional line icons (replace emoji) */
+.hero .emoji svg { width: 54px; height: 54px; display: block; }
+.item .ico { width: 28px; height: 28px; color: var(--brand); }
+.item .ico svg { width: 28px; height: 28px; display: block; }

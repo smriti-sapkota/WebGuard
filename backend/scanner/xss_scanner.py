@@ -75,22 +75,22 @@ DESCRIPTION = (
 FIX = """Always HTML-encode user input before inserting it into HTML output.
 The fix depends on your framework:
 
-❌ Vulnerable (Python):
+✗ Vulnerable (Python):
     return f"<p>Hello, {username}</p>"
 
-✅ Fixed (Python — manual):
+✓ Fixed (Python — manual):
     from html import escape
     return f"<p>Hello, {escape(username)}</p>"
 
-✅ Fixed (Jinja2 templates — auto-escaping ON by default):
+✓ Fixed (Jinja2 templates — auto-escaping ON by default):
     <p>Hello, {{ username }}</p>
     # Jinja2 encodes automatically — never use {{ username | safe }} on user input!
 
-✅ Fixed (React — safe by default):
+✓ Fixed (React — safe by default):
     <p>Hello, {username}</p>
     # React encodes automatically — never use dangerouslySetInnerHTML on user input!
 
-✅ Fixed (Content Security Policy header — defence in depth):
+✓ Fixed (Content Security Policy header — defence in depth):
     Content-Security-Policy: default-src 'self'; script-src 'self'
     # Prevents inline scripts even if injection occurs
 

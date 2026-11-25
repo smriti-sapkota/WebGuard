@@ -1,8 +1,8 @@
-# 🛡️ WebGuard
+# WebGuard
 
 **A beginner-friendly web vulnerability scanner.** Point it at a site you own, and WebGuard crawls it, probes every form and URL parameter for **SQL Injection**, **Cross-Site Scripting (XSS)** and **CSRF** weaknesses, then reports each finding with evidence and a suggested fix.
 
-> ⚠️ **Only scan systems you own or have explicit written permission to test.** WebGuard is an educational project (Tribhuvan University, BSc CSIT, 7th semester). See [Responsible use](#responsible-use).
+> **Only scan systems you own or have explicit written permission to test.** WebGuard is an educational project (Tribhuvan University, BSc CSIT, 7th semester). See [Responsible use](#responsible-use).
 
 ---
 
@@ -253,9 +253,9 @@ Interactive docs: `/docs` (Swagger) and `/redoc`. All routes are prefixed with `
 | `POST` | `/auth/login` | – | `{email, password}` → `{token, user}` |
 | `POST` | `/auth/google` | – | `{credential}` (Google ID token) → `{token, user}` |
 | `GET`  | `/auth/config` | – | `{google_client_id}` so the frontend can render Google sign-in |
-| `GET`  | `/auth/me` | ✅ | Current user |
-| `POST` | `/scan` | ✅ | Start a scan |
-| `GET`  | `/scan/{id}` | ✅ | Status and findings (owner only) |
+| `GET`  | `/auth/me` | Yes | Current user |
+| `POST` | `/scan` | Yes | Start a scan |
+| `GET`  | `/scan/{id}` | Yes | Status and findings (owner only) |
 
 **Start a scan**
 
@@ -354,4 +354,4 @@ Issues and pull requests are welcome on [GitHub](https://github.com/smriti-sapko
 
 ---
 
-Built with ☕ by students at Tribhuvan University.
+Built by students at Tribhuvan University.
