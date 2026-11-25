@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import Icon from "../components/Icon";
-import scannerImg from "../assets/scanner.jpg";
+import Hero from "../components/Hero";
 
 const STATS = [
   { num: "3+", label: "Vuln Types" },
@@ -83,8 +83,6 @@ const TICKER = [
   "Fix Suggestions",
 ];
 
-const WORDS = ["SQL Injection", "XSS", "CSRF", "weak spots"];
-
 /** Fade/slide children in once they scroll into view. */
 function Reveal({ children, delay = 0, className = "" }) {
   const ref = useRef(null);
@@ -118,86 +116,10 @@ function Reveal({ children, delay = 0, className = "" }) {
   );
 }
 
-/** Types out and deletes each word in turn. */
-function Typewriter({ words }) {
-  const [i, setI] = useState(0);
-  const [text, setText] = useState("");
-  const [deleting, setDeleting] = useState(false);
-  useEffect(() => {
-    const word = words[i];
-    const done = !deleting && text === word;
-    const empty = deleting && text === "";
-    const t = setTimeout(
-      () => {
-        if (done) setDeleting(true);
-        else if (empty) {
-          setDeleting(false);
-          setI((i + 1) % words.length);
-        } else {
-          setText(
-            deleting ? word.slice(0, text.length - 1) : word.slice(0, text.length + 1),
-          );
-        }
-      },
-      done ? 1300 : deleting ? 40 : 85,
-    );
-    return () => clearTimeout(t);
-  }, [text, deleting, i, words]);
-  return (
-    <span className="typed">
-      {text}
-      <span className="caret" />
-    </span>
-  );
-}
-
 export default function HomePage({ setPage }) {
   return (
     <div className="page-content">
-      {/* Hero */}
-      <div className="home-hero">
-        <div>
-          <div className="home-tag">Web Vulnerability Scanner</div>
-          <h1 className="home-title">
-            Secure your web apps with <span>WebGuard</span>
-          </h1>
-          <p className="home-sub">
-            Hunting for <Typewriter words={WORDS} />
-          </p>
-          <p className="home-desc">
-            Automated scanning for SQL Injection, XSS, and CSRF vulnerabilities.
-            Authenticated scans, live status tracking, and clear findings — all
-            in one place.
-          </p>
-          <div className="home-btns">
-            <button className="btn-solid btn-cta" onClick={() => setPage("scanner")}>
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-                <polygon points="5 3 19 12 5 21 5 3" />
-              </svg>
-              Start Scanning
-            </button>
-            <button className="btn-outline" onClick={() => setPage("results")}>
-              View Results
-            </button>
-          </div>
-        </div>
-
-        <div className="home-img-wrap">
-          <img
-            src={scannerImg}
-            alt="Security scanning"
-            onError={(e) => {
-              e.target.style.display = "none";
-              e.target.parentElement.style.background = "var(--green-light)";
-              e.target.parentElement.style.minHeight = "300px";
-            }}
-          />
-          <div className="home-img-overlay" />
-          <div className="scan-line" />
-          <div className="float-chip chip-a"><Icon name="check" size={13} /> No XSS found</div>
-          <div className="float-chip chip-b"><Icon name="alert" size={13} /> 2 issues</div>
-        </div>
-      </div>
+      <Hero setPage={setPage} />
 
       {/* Ticker */}
       <div className="ticker" aria-hidden="true">
@@ -223,7 +145,7 @@ export default function HomePage({ setPage }) {
       </div>
 
       {/* Vuln types */}
-      <div className="vuln-section">
+      <div className="vuln-section" id="coverage">
         <Reveal>
           <div className="section-eyebrow">Coverage</div>
           <div className="section-title">What WebGuard detects</div>
