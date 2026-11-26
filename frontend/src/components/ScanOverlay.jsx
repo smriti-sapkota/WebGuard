@@ -1,5 +1,22 @@
+import { useEffect, useState } from "react";
+
+const STEPS = [
+  "Crawling pages",
+  "Testing forms",
+  "Checking for SQL injection",
+  "Hunting XSS",
+  "Verifying CSRF protection",
+  "Analyzing responses",
+];
+
 // Full-screen "Scanning" loader shown while a scan is running.
 export default function ScanOverlay({ target, onStop }) {
+  const [step, setStep] = useState(0);
+  useEffect(() => {
+    const t = setInterval(() => setStep((s) => (s + 1) % STEPS.length), 2600);
+    return () => clearInterval(t);
+  }, []);
+
   return (
     <div className="so" role="alertdialog" aria-live="polite" aria-label="Scanning in progress">
       <div className="so-box">
@@ -41,6 +58,9 @@ export default function ScanOverlay({ target, onStop }) {
           </div>
         </div>
 
+        <p className="so-step" key={step}>
+          {STEPS[step]}
+        </p>
         <p className="so-target" title={target}>
           {target || "your website"}
         </p>

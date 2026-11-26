@@ -51,6 +51,14 @@
   75% { content: "..."; }
 }
 
+.so-step {
+  margin: 0 0 14px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #e8f1ea;
+  animation: so-step 0.5s ease-out;
+}
+@keyframes so-step { from { opacity: 0; transform: translateY(6px); } }
 .so-target {
   margin: 0 auto 6px;
   max-width: 100%;
@@ -78,5 +86,5 @@
 
 @media (prefers-reduced-motion: reduce) {
   .so-ring-a { animation-duration: 4s; }
-  .so-ring-b, .so-dots::after { animation: none; }
+  .so-ring-b, .so-dots::after, .so-step { animation: none; }
 }
