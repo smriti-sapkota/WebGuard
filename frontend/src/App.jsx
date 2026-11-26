@@ -11,6 +11,7 @@ import useScan from "./hooks/useScan";
 import "./home.css";
 import "./footer.css";
 import "./history.css";
+import "./scanoverlay.css";
 
 export default function App() {
   const [page, setPage] = useState("home");

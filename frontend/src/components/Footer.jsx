@@ -1,4 +1,4 @@
-const LogoMark = ({ size = 34 }) => (
+const LogoMark = ({ size = 26 }) => (
   <svg width={size} height={size} viewBox="0 0 32 32" fill="none" aria-hidden="true">
     <path
       d="M16 2.5 4.5 7v8.2c0 7 4.8 12.4 11.5 14.3 6.7-1.9 11.5-7.3 11.5-14.3V7L16 2.5Z"

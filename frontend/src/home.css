@@ -28,7 +28,8 @@
 .section-eyebrow { font-family: "DM Mono", monospace; font-size: 12px; text-transform: uppercase; letter-spacing: .1em; color: var(--highlight); margin-bottom: 6px; font-weight: 600; }
 .vuln-card { height: 100%; transition: border-color .15s, box-shadow .15s, transform .25s; }
 .vuln-card:hover, .step:hover, .legal-card:hover { transform: translateY(-4px); }
-.vuln-icon { transition: transform .3s; color: var(--green, #34a853); display: inline-block; }
+.vuln-icon { transition: transform .3s; color: var(--green, #34a853); display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; }
+.vuln-icon svg { display: block; flex-shrink: 0; }
 .step-icon, .legal-icon { color: var(--green, #34a853); }
 .vuln-card:hover .vuln-icon, .step:hover .step-icon, .legal-card:hover .legal-icon { transform: scale(1.18) rotate(-6deg); }
 

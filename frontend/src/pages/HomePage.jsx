@@ -154,7 +154,7 @@ export default function HomePage({ setPage }) {
           {VULNS.map((v, i) => (
             <Reveal key={v.name} delay={i * 110}>
               <div className="vuln-card">
-                <div className="vuln-icon"><Icon name={v.icon} size={28} /></div>
+                <div className="vuln-icon"><Icon name={v.icon} size={20} /></div>
                 <div className="vuln-name">{v.name}</div>
                 <div className="vuln-desc">{v.desc}</div>
               </div>

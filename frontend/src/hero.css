@@ -1,24 +1,24 @@
 /* WebGuard hero: dark, neon green (matches the reference artwork) */
 .wg-hero { --neon: #39FF65; --neon-soft: #4ee06f; position: relative; overflow: hidden; background: radial-gradient(ellipse at 78% 45%, #0b1a11 0%, #060a0a 62%); color: #e8f1ea; }
-.wg-hero-inner { position: relative; z-index: 1; max-width: 1320px; margin: 0 auto; padding: 100px 28px 28px; display: grid; grid-template-columns: 0.95fr 1.05fr; gap: 24px; align-items: center; }
+.wg-hero-inner { position: relative; z-index: 1; max-width: 1320px; margin: 0 auto; padding: 70px 28px 28px; display: grid; grid-template-columns: 0.95fr 1.05fr; gap: 24px; align-items: center; }
 
-.wg-tag { display: inline-flex; align-items: center; gap: 9px; font-size: 14px; color: #e8f1ea; border: 1px solid rgba(57,255,101,.55); border-radius: 22px; padding: 7px 16px; margin-bottom: 26px; }
+.wg-tag { display: inline-flex; align-items: center; gap: 9px; font-size: 12.5px; color: #e8f1ea; border: 1px solid rgba(57,255,101,.55); border-radius: 22px; padding: 6px 14px; margin-bottom: 22px; }
 .wg-tag i { width: 9px; height: 9px; border-radius: 50%; background: var(--neon); box-shadow: 0 0 8px var(--neon); }
-.wg-copy h1 { font-size: clamp(38px, 5.2vw, 72px); line-height: 1.04; letter-spacing: -.035em; font-weight: 800; margin: 0 0 22px; color: #fff; }
+.wg-copy h1 { font-size: clamp(34px, 4.5vw, 62px); line-height: 1.04; letter-spacing: -.035em; font-weight: 800; margin: 0 0 18px; color: #fff; }
 .wg-copy h1 span { color: var(--neon-soft); }
-.wg-desc { max-width: 40ch; font-size: 19px; line-height: 1.55; color: #aebdb3; margin: 0 0 30px; }
+.wg-desc { max-width: 40ch; font-size: 16.5px; line-height: 1.55; color: #aebdb3; margin: 0 0 26px; }
 .wg-desc em { font-style: normal; color: var(--neon-soft); }
-.wg-btns { display: flex; gap: 16px; flex-wrap: wrap; }
-.wg-btn { display: inline-flex; align-items: center; gap: 12px; font: inherit; font-weight: 600; font-size: 16px; padding: 15px 30px; border-radius: 40px; cursor: pointer; transition: transform .15s, box-shadow .2s, border-color .2s, color .2s; }
+.wg-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+.wg-btn { display: inline-flex; align-items: center; gap: 12px; font: inherit; font-weight: 600; font-size: 14.5px; padding: 12px 26px; border-radius: 40px; cursor: pointer; transition: transform .15s, box-shadow .2s, border-color .2s, color .2s; }
 .wg-btn-primary { background: var(--neon-soft); color: #04120a; border: 1px solid var(--neon-soft); box-shadow: 0 0 26px rgba(57,255,101,.28); }
 .wg-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 36px rgba(57,255,101,.5); }
 .wg-btn-ghost { background: transparent; color: #fff; border: 1px solid rgba(232,241,234,.7); }
 .wg-btn-ghost:hover { border-color: var(--neon); color: var(--neon); }
 .wg-try { display: flex; align-items: flex-end; gap: 6px; margin: 10px 0 0 34px; color: #cfe0d5; }
-.wg-try span { font-family: "Caveat", "Segoe Script", "Bradley Hand", cursive; font-size: 22px; padding-bottom: 2px; border-bottom: 2px solid var(--neon-soft); transform: rotate(-4deg); }
+.wg-try span { font-family: "Caveat", "Segoe Script", "Bradley Hand", cursive; font-size: 19px; padding-bottom: 2px; border-bottom: 2px solid var(--neon-soft); transform: rotate(-4deg); }
 
 /* stage */
-.wg-stage { position: relative; width: 100%; max-width: 760px; margin: 0 auto; aspect-ratio: 832 / 680; }
+.wg-stage { position: relative; width: 100%; max-width: 680px; margin: 0 auto; aspect-ratio: 832 / 680; }
 .wg-art { position: absolute; inset: 0; animation: wg-bob 6s ease-in-out infinite; -webkit-mask-image: radial-gradient(ellipse 72% 70% at 52% 50%, #000 62%, transparent 100%); mask-image: radial-gradient(ellipse 72% 70% at 52% 50%, #000 62%, transparent 100%); }
 .wg-art img { width: 100%; height: 100%; display: block; }
 @keyframes wg-bob { 50% { transform: translateY(-6px); } }
@@ -72,7 +72,7 @@
 .wg-feature span { display: block; color: #8fa196; font-size: 14px; margin-top: 3px; }
 
 @media (max-width: 960px) {
-  .wg-hero-inner { grid-template-columns: 1fr; padding-top: 84px; }
+  .wg-hero-inner { grid-template-columns: 1fr; padding-top: 76px; }
   .wg-stage { max-width: 560px; }
   .wg-features { grid-template-columns: repeat(2, 1fr); row-gap: 18px; }
   .wg-feature:nth-child(3) { border-left: 0; }
@@ -80,7 +80,7 @@
 @media (max-width: 560px) {
   .wg-features { grid-template-columns: 1fr; }
   .wg-feature { border-left: 0; }
-  .wg-desc { font-size: 17px; }
+  .wg-desc { font-size: 15px; }
   .wg-try { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {

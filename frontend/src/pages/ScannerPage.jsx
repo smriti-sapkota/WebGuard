@@ -1,3 +1,5 @@
+import ScanOverlay from "../components/ScanOverlay";
+
 function StatusBadge({ status }) {
   const s = String(status || "idle").toLowerCase();
   const cls =
@@ -58,6 +60,8 @@ export default function ScannerPage({
           </button>
         </div>
       )}
+
+      {scanning && <ScanOverlay target={target} onStop={stopPolling} />}
 
       <div className="scanner-grid">
         {/* ── Form ── */}

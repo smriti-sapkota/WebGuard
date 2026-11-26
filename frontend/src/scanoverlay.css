@@ -1,0 +1,82 @@
+/* ─── SCANNING OVERLAY ───────────────────── */
+.so {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: radial-gradient(ellipse at 50% 45%, rgba(11, 26, 17, 0.94), rgba(4, 8, 6, 0.97));
+  backdrop-filter: blur(4px);
+  animation: so-in 0.25s ease-out;
+}
+@keyframes so-in { from { opacity: 0; } }
+.so-box { text-align: center; color: #e8f1ea; max-width: 520px; }
+
+.so-loop {
+  position: relative;
+  width: min(340px, 70vw);
+  aspect-ratio: 1;
+  margin: 0 auto 28px;
+}
+.so-ring { position: absolute; inset: 0; width: 100%; height: 100%; }
+.so-ring-a { animation: so-spin 1.6s linear infinite; filter: drop-shadow(0 0 10px rgba(57, 255, 101, 0.55)); }
+.so-ring-b { animation: so-spin 9s linear infinite reverse; }
+@keyframes so-spin { to { transform: rotate(360deg); } }
+
+.so-text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(26px, 6vw, 36px);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #fff;
+  text-shadow: 0 0 18px rgba(57, 255, 101, 0.5);
+}
+.so-dots::after {
+  content: "";
+  display: inline-block;
+  width: 1.1em;
+  text-align: left;
+  animation: so-dots 1.4s steps(4, end) infinite;
+}
+@keyframes so-dots {
+  0% { content: ""; }
+  25% { content: "."; }
+  50% { content: ".."; }
+  75% { content: "..."; }
+}
+
+.so-target {
+  margin: 0 auto 6px;
+  max-width: 100%;
+  font-family: "DM Mono", monospace;
+  font-size: 14px;
+  color: #4ee06f;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.so-hint { margin: 0 0 20px; font-size: 13px; color: #8fa196; }
+.so-stop {
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 22px;
+  border-radius: 20px;
+  color: #cfe0d5;
+  background: transparent;
+  border: 1px solid rgba(232, 241, 234, 0.4);
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+.so-stop:hover { border-color: #39FF65; color: #39FF65; }
+
+@media (prefers-reduced-motion: reduce) {
+  .so-ring-a { animation-duration: 4s; }
+  .so-ring-b, .so-dots::after { animation: none; }
+}
