@@ -11,7 +11,7 @@ from ..config import settings
 from ..database import SESSION_LOCAL, engine
 from ..security import assert_public_url, get_current_user
 from ..models import Scan, User, Vulnerability
-from ..schemas import ScanRequest, ScanResponse, ScanResultOut
+from ..schemas import ScanRequest, ScanResponse, ScanResultOut, ScanSummaryOut
 from ..scanner.crawler import crawl
 from ..scanner.sql_scanner import scan_sql_injection
 from ..scanner.xss_scanner import scan_xss
@@ -332,3 +332,50 @@ def get_scan_result(
         error_message=scan.error_message,
         vulnerabilities=scan.vulnerabilities,
     )
+
+
+@router.get("/scans", response_model=list[ScanSummaryOut])
+def list_scans(
+    session: SESSION_LOCAL,
+    user: User = Depends(get_current_user),
+    limit: int = 100,
+):
+    """The logged-in user's scan history, newest first, with severity counts."""
+    limit = max(1, min(limit, 200))
+    scans = session.exec(
+        select(Scan)
+        .where(Scan.user_id == user.id)
+        .order_by(Scan.created_at.desc())  # type: ignore[attr-defined]
+        .limit(limit)
+    ).all()
+    if not scans:
+        return []
+
+    ids = [s.id for s in scans]
+    rows = session.exec(
+        select(Vulnerability.scan_id, Vulnerability.severity, func.count())
+        .where(Vulnerability.scan_id.in_(ids))  # type: ignore[attr-defined]
+        .group_by(Vulnerability.scan_id, Vulnerability.severity)
+    ).all()
+    counts: dict[int, dict[str, int]] = {}
+    for scan_id, severity, n in rows:
+        counts.setdefault(scan_id, {})[str(severity).lower()] = n
+
+    out = []
+    for s in scans:
+        c = counts.get(s.id, {})
+        out.append(
+            ScanSummaryOut(
+                scan_id=s.id,  # type: ignore[arg-type]
+                target_url=s.target_url,
+                status=s.status,
+                created_at=s.created_at,
+                completed_at=s.completed_at,
+                error_message=s.error_message,
+                total=sum(c.values()),
+                high=c.get("high", 0),
+                medium=c.get("medium", 0),
+                low=c.get("low", 0) + c.get("info", 0),
+            )
+        )
+    return out

@@ -1,0 +1,105 @@
+/* ─── HISTORY + DOWNLOADS ─────────────────── */
+.hist-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+.hist-summary { margin-bottom: 16px; }
+.hist-link {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: var(--highlight);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.hrow {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  margin-bottom: 10px;
+  box-shadow: var(--shadow);
+}
+.hrow-main {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) auto minmax(0, 1.2fr) auto;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 16px;
+}
+.hrow-url {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.hrow-meta {
+  margin-top: 3px;
+  font-family: "DM Mono", monospace;
+  font-size: 11px;
+  color: var(--text3);
+}
+.hrow-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.hrow-view {
+  padding: 6px 14px;
+  font-size: 12.5px;
+}
+.hrow-view:disabled { opacity: 0.5; cursor: not-allowed; }
+.hrow-error {
+  margin: 0 16px 12px;
+  padding: 8px 12px;
+  font-size: 12.5px;
+  color: var(--red);
+  background: rgba(184, 50, 50, 0.06);
+  border: 1px solid rgba(184, 50, 50, 0.2);
+  border-radius: 7px;
+}
+.hrow-detail {
+  padding: 4px 16px 6px;
+  border-top: 1px solid var(--border);
+  padding-top: 14px;
+}
+
+.dl {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.dl-label {
+  font-family: "DM Mono", monospace;
+  font-size: 11px;
+  color: var(--text3);
+  margin-right: 2px;
+}
+.dl-btn {
+  font-family: "DM Mono", monospace;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 6px 11px;
+  border-radius: 6px;
+  border: 1px solid var(--green-border);
+  background: var(--green-light);
+  color: var(--highlight);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.dl-btn:hover:not(:disabled) { background: var(--highlight); color: #fff; }
+.dl-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.dl-err { font-size: 11.5px; color: var(--red); }
+.dl-compact .dl-btn { padding: 5px 9px; font-size: 10.5px; }
+
+@media (max-width: 900px) {
+  .hrow-main { grid-template-columns: 1fr auto; }
+  .hrow-main .pills,
+  .hrow-actions { grid-column: 1 / -1; }
+}

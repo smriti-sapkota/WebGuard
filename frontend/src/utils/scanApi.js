@@ -44,6 +44,19 @@ export async function startScanRequest(apiBase, payload) {
   return res.json()
 }
 
+export async function fetchScanHistory(apiBase) {
+  const res = await fetch(`${apiBase}/scans`, { headers: authHeaders() })
+  if (!res.ok) {
+    let detail = `HTTP ${res.status}`
+    try {
+      const err = await res.json()
+      if (err.detail) detail = String(err.detail)
+    } catch (_) {}
+    throw new Error(`Could not load history — ${detail}`)
+  }
+  return res.json()
+}
+
 export async function fetchScanStatus(apiBase, scanId) {
   const res = await fetch(`${apiBase}/scan/${scanId}`, { headers: authHeaders() })
   if (!res.ok) {
@@ -51,7 +64,7 @@ export async function fetchScanStatus(apiBase, scanId) {
     try {
       const err = await res.json()
       if (err.detail) detail = String(err.detail)
-    } catch (_) {}
+    } catch { /* not json */ }
     throw new Error(`Poll failed — ${detail}`)
   }
   return res.json()

@@ -6,8 +6,11 @@ import Footer from "./components/Footer";
 import HomePage from "./pages/HomePage";
 import ScannerPage from "./pages/ScannerPage";
 import ResultsPage from "./pages/ResultsPage";
+import HistoryPage from "./pages/HistoryPage";
 import useScan from "./hooks/useScan";
 import "./home.css";
+import "./footer.css";
+import "./history.css";
 
 export default function App() {
   const [page, setPage] = useState("home");
@@ -16,7 +19,7 @@ export default function App() {
 
   // Scanner/results need a login
   const shown =
-    !loading && !user && (page === "scanner" || page === "results")
+    !loading && !user && ["scanner", "results", "history"].includes(page)
       ? "login"
       : page;
 
@@ -57,9 +60,19 @@ export default function App() {
         />
       )}
 
-      {shown === "results" && <ResultsPage vulns={vulns} message={message} />}
+      {shown === "results" && (
+        <ResultsPage
+          vulns={vulns}
+          message={message}
+          scanId={scanId}
+          target={target}
+          status={status}
+        />
+      )}
 
-      <Footer />
+      {shown === "history" && <HistoryPage setPage={setPage} />}
+
+      <Footer setPage={setPage} />
     </>
   );
 }

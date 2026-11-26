@@ -112,6 +112,7 @@ export default function Header({ page, setPage }) {
             { id: "home", label: "Home" },
             { id: "scanner", label: "Scanner" },
             { id: "results", label: "Results" },
+            { id: "history", label: "History" },
           ].map(({ id, label }) => (
             <button
               key={id}

@@ -1,61 +1,10 @@
-function sevClass(severity) {
-  const s = String(severity || "").toLowerCase();
-  if (s === "high") return "high";
-  if (s === "medium") return "medium";
-  return "low";
-}
+import FindingCard from "../components/FindingCard";
+import DownloadButtons from "../components/DownloadButtons";
+import { severityCounts } from "../utils/report";
 
-// Matches VulnerabilityOut from backend schemas.py exactly:
-// { id, vuln_type, severity, affected_url, parameter,
-//   payload, evidence, description, fix }
-function FindingCard({ vuln }) {
-  const sc = sevClass(vuln.severity);
-  return (
-    <div className={`fc fc-${sc}`}>
-      <div className="fc-top">
-        <span className="fc-name">{vuln.vuln_type || "Unknown"}</span>
-        <span className={`sev-badge ${sc}`}>{vuln.severity || "LOW"}</span>
-      </div>
-      <div className="fc-body">
-        <div className="ff">
-          <strong>URL</strong>
-          {vuln.affected_url || "—"}
-        </div>
-        <div className="ff">
-          <strong>Parameter</strong>
-          <code>{vuln.parameter || "—"}</code>
-        </div>
-        <div className="ff">
-          <strong>Payload</strong>
-          <code>{vuln.payload || "—"}</code>
-        </div>
-        <div className="ff">
-          <strong>Evidence</strong>
-          {vuln.evidence || "—"}
-        </div>
-        {vuln.description && (
-          <div className="ff full">
-            <strong>Description</strong>
-            {vuln.description}
-          </div>
-        )}
-        {vuln.fix && (
-          <div className="ff full">
-            <strong>Fix</strong>
-            {vuln.fix}
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
-
-export default function ResultsPage({ vulns, message }) {
-  const counts = { high: 0, medium: 0, low: 0 };
-  vulns.forEach((v) => {
-    const k = String(v.severity || "").toLowerCase();
-    if (k in counts) counts[k]++;
-  });
+export default function ResultsPage({ vulns, message, scanId, target, status }) {
+  const counts = severityCounts(vulns);
+  const canDownload = vulns.length > 0 && scanId != null;
 
   return (
     <div className="results-wrap">
@@ -90,7 +39,7 @@ export default function ResultsPage({ vulns, message }) {
         </div>
       </div>
 
-      {/* Pills */}
+      {/* Pills + download */}
       <div className="findings-head">
         <div className="pills">
           <span className="pill p-all">All: {vulns.length}</span>
@@ -98,6 +47,15 @@ export default function ResultsPage({ vulns, message }) {
           <span className="pill p-medium">Med: {counts.medium}</span>
           <span className="pill p-low">Low: {counts.low}</span>
         </div>
+        <DownloadButtons
+          disabled={!canDownload}
+          getScan={() => ({
+            scan_id: scanId,
+            target_url: target,
+            status,
+            vulnerabilities: vulns,
+          })}
+        />
       </div>
 
       {/* Message while scanning / no results */}

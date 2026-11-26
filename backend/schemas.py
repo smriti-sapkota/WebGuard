@@ -53,3 +53,16 @@ class ScanResultOut(BaseModel):
 
     class Config:
         from_attributes = True
+
+class ScanSummaryOut(BaseModel):
+    """One row of a user's scan history (no per-finding details)."""
+    scan_id: int
+    target_url: str
+    status: str
+    created_at: datetime
+    completed_at: Optional[datetime] = None
+    error_message: Optional[str] = None
+    total: int = 0
+    high: int = 0
+    medium: int = 0
+    low: int = 0

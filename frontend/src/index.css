@@ -830,109 +830,6 @@ body {
   border-radius: 3px;
 }
 
-/* ─── FOOTER ─────────────────────────────── */
-.footer {
-  background: var(--surface);
-  border-top: 1px solid var(--border);
-  margin-top: auto;
-}
-.footer-inner {
-  max-width: 1240px;
-  margin: 0 auto;
-  padding: 36px 28px 28px;
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  gap: 40px;
-}
-.footer-logo {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  margin-bottom: 10px;
-}
-.footer-logo-icon {
-  width: 28px;
-  height: 28px;
-  background: var(--green-light);
-  border: 1px solid var(--green-border);
-  border-radius: 7px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.footer-logo-name {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--text);
-}
-.footer-logo-name span {
-  color: var(--highlight);
-}
-.footer-tagline {
-  font-size: 12px;
-  color: var(--text2);
-  line-height: 1.65;
-  max-width: 32ch;
-}
-.footer-col-title {
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--text);
-  text-transform: uppercase;
-  letter-spacing: 0.07em;
-  margin-bottom: 12px;
-  font-family: "DM Mono", monospace;
-}
-.footer-links {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.footer-link {
-  font-size: 12.5px;
-  color: var(--text2);
-  text-decoration: none;
-  cursor: pointer;
-  transition: color 0.15s;
-  background: none;
-  border: none;
-  text-align: left;
-  font-family: "DM Sans", sans-serif;
-  padding: 0;
-}
-.footer-link:hover {
-  color: #4f7cac;
-}
-.footer-bottom {
-  max-width: 1240px;
-  margin: 0 auto;
-  padding: 16px 28px;
-  border-top: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-.footer-copy {
-  font-family: "DM Mono", monospace;
-  font-size: 11px;
-  color: var(--text3);
-}
-.footer-badges {
-  display: flex;
-  gap: 6px;
-}
-.footer-badge {
-  font-family: "DM Mono", monospace;
-  font-size: 10px;
-  padding: 2px 8px;
-  border-radius: 4px;
-  border: 1px solid var(--border2);
-  color: var(--text3);
-  background: var(--surface2);
-}
-
 /* ─── RESPONSIVE ─────────────────────────── */
 @media (max-width: 900px) {
   .home-hero {
@@ -962,10 +859,6 @@ body {
   }
   .sev-indicators {
     grid-template-columns: 1fr;
-  }
-  .footer-inner {
-    grid-template-columns: 1fr;
-    gap: 24px;
   }
 }
 @media (max-width: 600px) {
