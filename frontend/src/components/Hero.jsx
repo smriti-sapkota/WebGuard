@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import Icon from "./Icon";
+import SpinGlobe from "./SpinGlobe";
 import robotImg from "../assets/hero-robot.webp";
 import "../hero.css";
 
@@ -121,7 +122,7 @@ export default function Hero({ setPage }) {
         <div className="wg-stage">
           <div ref={artRef} className="wg-art">
             <img src={robotImg} alt="WebGuard pixel guardian holding a security shield in front of a digital globe" />
-            <div className="wg-globe-sweep" aria-hidden="true" />
+            <SpinGlobe />
             <div className="wg-shield-glow" aria-hidden="true" />
             <span className="wg-lid wg-lid-l" aria-hidden="true" />
             <span className="wg-lid wg-lid-r" aria-hidden="true" />

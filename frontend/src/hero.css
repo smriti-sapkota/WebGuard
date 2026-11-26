@@ -1,6 +1,6 @@
 /* WebGuard hero: dark, neon green (matches the reference artwork) */
 .wg-hero { --neon: #39FF65; --neon-soft: #4ee06f; position: relative; overflow: hidden; background: radial-gradient(ellipse at 78% 45%, #0b1a11 0%, #060a0a 62%); color: #e8f1ea; }
-.wg-hero-inner { position: relative; z-index: 1; max-width: 1320px; margin: 0 auto; padding: 56px 28px 28px; display: grid; grid-template-columns: 0.95fr 1.05fr; gap: 24px; align-items: center; }
+.wg-hero-inner { position: relative; z-index: 1; max-width: 1320px; margin: 0 auto; padding: 100px 28px 28px; display: grid; grid-template-columns: 0.95fr 1.05fr; gap: 24px; align-items: center; }
 
 .wg-tag { display: inline-flex; align-items: center; gap: 9px; font-size: 14px; color: #e8f1ea; border: 1px solid rgba(57,255,101,.55); border-radius: 22px; padding: 7px 16px; margin-bottom: 26px; }
 .wg-tag i { width: 9px; height: 9px; border-radius: 50%; background: var(--neon); box-shadow: 0 0 8px var(--neon); }
@@ -26,6 +26,9 @@
 /* very slow light sweep around the globe (artwork is a single image) */
 .wg-globe-sweep { position: absolute; left: 24.5%; top: 6%; width: 61%; aspect-ratio: 1; border-radius: 50%; background: conic-gradient(from 0deg, transparent 0 70%, rgba(57,255,101,.14) 88%, transparent 100%); mix-blend-mode: screen; opacity: .8; animation: wg-turn 60s linear infinite; pointer-events: none; }
 @keyframes wg-turn { to { transform: rotate(360deg); } }
+
+/* rotating dotted globe layered over the baked-in one; masked to the globe disc, with a hole where the robot sits */
+.wg-spin-globe { position: absolute; left: 22.8%; top: 8.4%; width: 63.8%; aspect-ratio: 1; pointer-events: none; }
 
 /* shield pulse */
 .wg-shield-glow { position: absolute; left: 17%; top: 52%; width: 22%; height: 33%; border-radius: 40% 40% 50% 50%; background: radial-gradient(closest-side, rgba(57,255,101,.45), transparent); mix-blend-mode: screen; opacity: .3; animation: wg-shield 3.8s ease-in-out infinite; pointer-events: none; }
@@ -69,7 +72,7 @@
 .wg-feature span { display: block; color: #8fa196; font-size: 14px; margin-top: 3px; }
 
 @media (max-width: 960px) {
-  .wg-hero-inner { grid-template-columns: 1fr; padding-top: 40px; }
+  .wg-hero-inner { grid-template-columns: 1fr; padding-top: 84px; }
   .wg-stage { max-width: 560px; }
   .wg-features { grid-template-columns: repeat(2, 1fr); row-gap: 18px; }
   .wg-feature:nth-child(3) { border-left: 0; }

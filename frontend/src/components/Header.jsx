@@ -83,8 +83,20 @@ function ProfileMenu({ user, onLogout }) {
 
 export default function Header({ page, setPage }) {
   const { user, logout } = useAuth();
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const overHero = page === "home" && !scrolled;
   return (
-    <header className="header">
+    <header
+      className={`header${page === "home" ? " header-home" : ""}${overHero ? " on-hero" : ""}`}
+    >
       <div className="header-inner">
         <button className="logo" onClick={() => setPage("home")}>
           <div className="logo-icon">

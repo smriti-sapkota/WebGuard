@@ -51,6 +51,40 @@ body {
   top: 0;
   z-index: 200;
 }
+/* Home page: header overlays the hero, blends in at top, frosted white on scroll */
+.header-home {
+  margin-bottom: -59px;
+  background: rgba(255, 255, 255, 0.8);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  transition: background 0.25s, border-color 0.25s;
+}
+.header-home.on-hero {
+  background: transparent;
+  border-bottom-color: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+.header-home.on-hero .logo-name,
+.header-home.on-hero .nav-btn {
+  color: #e8f1ea;
+}
+.header-home.on-hero .logo-name span {
+  color: #4ee06f;
+}
+.header-home.on-hero .nav-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+.header-home.on-hero .nav-btn.active {
+  background: rgba(78, 224, 111, 0.15);
+  color: #4ee06f;
+}
+.header-home.on-hero .logo-icon {
+  background: rgba(78, 224, 111, 0.12);
+  border-color: rgba(78, 224, 111, 0.4);
+}
+
 .header-inner {
   max-width: 1240px;
   margin: 0 auto;
